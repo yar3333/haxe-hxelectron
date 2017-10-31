@@ -4,7 +4,7 @@
   <output>
     <movie outputType="Application" />
     <movie input="" />
-    <movie path="..\library\run.n" />
+    <movie path="bin\run.n" />
     <movie fps="0" />
     <movie width="0" />
     <movie height="0" />
@@ -48,7 +48,7 @@
   <options>
     <option showHiddenPaths="False" />
     <option testMovie="Custom" />
-    <option testMovieCommand="" />
+    <option testMovieCommand="neko bin\run.n" />
   </options>
   <!-- Plugin storage -->
   <storage />
