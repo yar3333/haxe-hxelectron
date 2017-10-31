@@ -4,7 +4,7 @@
   <output>
     <movie outputType="Application" />
     <movie input="" />
-    <movie path="bin\run.n" />
+    <movie path="bin\generator.n" />
     <movie fps="0" />
     <movie width="0" />
     <movie height="0" />
@@ -30,7 +30,7 @@
   <!-- haxelib libraries -->
   <haxelib>
     <library name="stdlib" />
-    <library name="ndllfinder" />
+    <library name="slambda" />
   </haxelib>
   <!-- Class files to compile (other referenced classes will automatically be included) -->
   <compileTargets>
@@ -48,7 +48,7 @@
   <options>
     <option showHiddenPaths="False" />
     <option testMovie="Custom" />
-    <option testMovieCommand="neko bin\run.n" />
+    <option testMovieCommand="neko bin\generator.n" />
   </options>
   <!-- Plugin storage -->
   <storage />
