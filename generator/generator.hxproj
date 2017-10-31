@@ -15,7 +15,6 @@
   </output>
   <!-- Other classes to be compiled into your SWF -->
   <classpaths>
-    <class path="..\library" />
     <class path="src" />
   </classpaths>
   <!-- Build options -->
@@ -40,11 +39,13 @@
     <hidden path="obj" />
     <hidden path="electron-api.json" />
     <hidden path="bin" />
+    <hidden path="produce-remote.cmd" />
   </hiddenPaths>
   <!-- Executed before build -->
   <preBuildCommand />
   <!-- Executed after build -->
-  <postBuildCommand alwaysRun="False">neko bin\generator.n</postBuildCommand>
+  <postBuildCommand alwaysRun="False">neko bin\generator.n
+produce-remote.cmd</postBuildCommand>
   <!-- Other project options -->
   <options>
     <option showHiddenPaths="False" />
