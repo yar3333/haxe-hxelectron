@@ -15,23 +15,26 @@ class Main
 		if (!FileSystem.exists(file)) error('API file not found [$file]');
 		
 		var pack = ['electron'];
-		var json = Json.parse(File.getContent(file) );
+		var json = Json.parse(File.getContent(file));
 		
 		var types = ElectronAPI.build(json, pack);
 		
 		var sourceCode = new StringMap<String>();
-		var printer = new haxe.macro.Printer();
+		var printer = new HaxePrinter();
 		
-		for (i in 0...types.length)
+		Sys.println('Generated [${types.length}] types into [$out]:');
+		for (type in types)
 		{
-			var type = types[i];
-			var modulePath = type.pack.join('.' );
+			Sys.println("\t" + type.pack.concat([type.name]).join("."));
+			
+			var modulePath = type.pack.join('.');
 			var moduleName = type.name;
 			
 			var doc = '/**';
 			for (item in json)
 			{
-				if (item.name == type.name) {
+				if (item.name == type.name)
+				{
 					if (item.description != null) doc += '\n\t' + item.description + '\n';
 					if (item.websiteUrl != null) doc += '\n\tSee: <' + item.websiteUrl + '>';
 					break;
@@ -64,15 +67,13 @@ class Main
 			var file = parts.pop();
 			var dir = out + '/' + parts.join('/');
 			if (!FileSystem.exists(dir)) FileSystem.createDirectory(dir);
-			File.saveContent(dir + '/' + file+'.hx', sourceCode.get(key));
+			File.saveContent(dir + '/' + file + '.hx', sourceCode.get(key));
 		}
-		
-		Sys.println('Generated [${types.length}] types into [$out]');
 	}
 	
-	static function error(info:String, code=-1)
+	static function error(info:String)
 	{
 		Sys.println(info);
-		Sys.exit(code);
+		Sys.exit(1);
 	}
 }

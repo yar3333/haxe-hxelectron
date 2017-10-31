@@ -3,25 +3,26 @@ package electron;
 /**
 	See: <http://electron.atom.io/docs/api/structures/upload-file>
 **/
-@:require(js, electron) typedef UploadFile = {
+@:require(js, electron) typedef UploadFile =
+{
 	/**
-		file.
-	**/
+	 file.
+	 */
 	var type : String;
 	/**
-		Path of file to be uploaded.
-	**/
+	 Path of file to be uploaded.
+	 */
 	var filePath : String;
 	/**
-		Defaults to 0.
-	**/
+	 Defaults to 0.
+	 */
 	var offset : Int;
 	/**
-		Number of bytes to read from offset. Defaults to 0.
-	**/
+	 Number of bytes to read from offset. Defaults to 0.
+	 */
 	var length : Int;
 	/**
-		Last Modification time in number of seconds sine the UNIX epoch.
-	**/
+	 Last Modification time in number of seconds sine the UNIX epoch.
+	 */
 	var modificationTime : Float;
 }
