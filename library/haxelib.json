@@ -1,0 +1,13 @@
+{
+  "name": "hxelectron",
+  "url": "https://bitbucket.org/yar3333/haxe-hxelectron",
+  "license": "MIT",
+  "tags": ["electron","node","desktop"],
+  "description": "Externs for the electron framework",
+  "releasenote": "init",
+  "version": "1.6.15",
+  "contributors": ["yar3333"],
+  "dependencies": {
+    "hxnodejs" : ""
+  }
+}
