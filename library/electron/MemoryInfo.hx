@@ -13,7 +13,7 @@ package electron;
 	**/
 	var workingSetSize : Int;
 	/**
-		The maximum amount of memory that has ever been pinned to actual physical RAM. On macOS its value will always be 0.
+		The maximum amount of memory that has ever been pinned to actual physical RAM.
 	**/
 	var peakWorkingSetSize : Int;
 	/**

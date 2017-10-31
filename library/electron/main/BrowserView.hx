@@ -33,5 +33,4 @@ package electron.main;
 	**/
 	function setBounds(bounds:Rectangle):Void;
 	function setBackgroundColor(color:String):Void;
-	static function fromId(id:Int):BrowserView;
 }

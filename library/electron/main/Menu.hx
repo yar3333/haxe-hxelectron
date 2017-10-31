@@ -15,11 +15,11 @@ package electron.main;
 		Pops up this menu as a context menu in the browserWindow.
 	**/
 	function popup(?browserWindow:BrowserWindow, ?options:{ /**
-		Default is the current mouse cursor position. Must be declared if y is declared.
+		Default is the current mouse cursor position.
 	**/
 	@:optional
 	var x : Float; /**
-		Default is the current mouse cursor position. Must be declared if x is declared.
+		( if x is used) Default is the current mouse cursor position.
 	**/
 	@:optional
 	var y : Float; /**

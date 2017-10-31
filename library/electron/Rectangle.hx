@@ -5,19 +5,13 @@ package electron;
 **/
 @:require(js, electron) typedef Rectangle = {
 	/**
-		The x coordinate of the origin of the rectangle (must be an integer)
+		The x coordinate of the origin of the rectangle
 	**/
 	var x : Float;
 	/**
-		The y coordinate of the origin of the rectangle (must be an integer)
+		The y coordinate of the origin of the rectangle
 	**/
 	var y : Float;
-	/**
-		The width of the rectangle (must be an integer)
-	**/
 	var width : Float;
-	/**
-		The height of the rectangle (must be an integer)
-	**/
 	var height : Float;
 }
