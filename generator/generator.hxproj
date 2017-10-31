@@ -39,6 +39,8 @@
   <!-- Paths to exclude from the Project Explorer tree -->
   <hiddenPaths>
     <hidden path="obj" />
+    <hidden path="electron-api.json" />
+    <hidden path="bin" />
   </hiddenPaths>
   <!-- Executed before build -->
   <preBuildCommand />
