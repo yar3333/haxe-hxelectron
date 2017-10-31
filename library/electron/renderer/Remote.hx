@@ -2,7 +2,7 @@ package electron.renderer;
 
 /**
 **/
-@:require(js, electron) @:jsRequire("electron", "remote") extern class Remote
+@:require(js, hxelectron) @:jsRequire("electron", "remote") extern class Remote
 {
 	/**
 	 e.g.

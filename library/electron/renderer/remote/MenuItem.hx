@@ -5,7 +5,7 @@ package electron.renderer.remote;
 
 	See: <http://electron.atom.io/docs/api/menu-item>
 **/
-@:require(js, electron) @:jsRequire("electron", "remote.MenuItem") extern class MenuItem
+@:require(js, hxelectron) @:jsRequire("electron", "remote.MenuItem") extern class MenuItem
 {
 	/**
 	 A Boolean indicating whether the item is enabled, this property can be dynamically changed.

@@ -5,7 +5,7 @@ package electron.renderer.remote;
 
 	See: <http://electron.atom.io/docs/api/web-request>
 **/
-@:require(js, electron) @:jsRequire("electron", "remote.WebRequest") extern class WebRequest
+@:require(js, hxelectron) @:jsRequire("electron", "remote.WebRequest") extern class WebRequest
 {
 	/**
 	 The listener will be called with listener(details, callback) when a request is about to occur. The uploadData is an array of UploadData objects. The callback has to be called with an response object.

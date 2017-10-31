@@ -2,7 +2,7 @@ package electron.renderer.remote;
 
 /**
 **/
-@:require(js, electron) @:jsRequire("electron", "remote.autoUpdater") extern class AutoUpdater
+@:require(js, hxelectron) @:jsRequire("electron", "remote.autoUpdater") extern class AutoUpdater
 {
 	/**
 	 Sets the url and initialize the auto updater.

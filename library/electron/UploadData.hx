@@ -3,7 +3,7 @@ package electron;
 /**
 	See: <http://electron.atom.io/docs/api/structures/upload-data>
 **/
-@:require(js, electron) typedef UploadData =
+@:require(js, hxelectron) typedef UploadData =
 {
 	/**
 	 Content being sent.

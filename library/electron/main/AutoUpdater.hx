@@ -2,7 +2,7 @@ package electron.main;
 
 /**
 **/
-@:require(js, electron) @:jsRequire("electron", "autoUpdater") extern class AutoUpdater
+@:require(js, hxelectron) @:jsRequire("electron", "autoUpdater") extern class AutoUpdater
 {
 	/**
 	 Sets the url and initialize the auto updater.

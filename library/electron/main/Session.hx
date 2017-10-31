@@ -5,7 +5,7 @@ package electron.main;
 
 	See: <http://electron.atom.io/docs/api/session>
 **/
-@:require(js, electron) @:jsRequire("electron", "Session") extern class Session extends js.node.events.EventEmitter<electron.main.Session>
+@:require(js, hxelectron) @:jsRequire("electron", "Session") extern class Session extends js.node.events.EventEmitter<electron.main.Session>
 {
 	/**
 	 A Cookies object for this session.
@@ -140,7 +140,7 @@ package electron.main;
 
 /**
 **/
-@:require(js, electron) @:enum abstract SessionEvent(String) from String to String
+@:require(js, hxelectron) @:enum abstract SessionEvent(String) from String to String
 {
 	/**
 	 Emitted when Electron is about to download item in webContents. Calling event.preventDefault() will cancel the download and item will not be available from next tick of the process.

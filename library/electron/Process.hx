@@ -2,7 +2,7 @@ package electron;
 
 /**
 **/
-@:require(js, electron) @:jsRequire("electron", "process") extern class Process
+@:require(js, hxelectron) @:jsRequire("electron", "process") extern class Process
 {
 	/**
 	 Causes the main thread of the current process crash.

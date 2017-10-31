@@ -5,7 +5,7 @@ package electron.renderer.remote;
 
 	See: <http://electron.atom.io/docs/api/browser-window>
 **/
-@:require(js, electron) @:jsRequire("electron", "remote.BrowserWindow") extern class BrowserWindow extends js.node.events.EventEmitter<electron.main.BrowserWindow>
+@:require(js, hxelectron) @:jsRequire("electron", "remote.BrowserWindow") extern class BrowserWindow extends js.node.events.EventEmitter<electron.main.BrowserWindow>
 {
 	/**
 	 A WebContents object this window owns. All web page related events and operations will be done via it. See the webContents documentation for its methods and events.
@@ -612,7 +612,7 @@ package electron.renderer.remote;
 
 /**
 **/
-@:require(js, electron) @:enum abstract BrowserWindowEvent(String) from String to String
+@:require(js, hxelectron) @:enum abstract BrowserWindowEvent(String) from String to String
 {
 	/**
 	 Emitted when the document changed its title, calling event.preventDefault() will prevent the native window's title from changing.

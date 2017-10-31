@@ -5,7 +5,7 @@ package electron.main;
 
 	See: <http://electron.atom.io/docs/api/tray>
 **/
-@:require(js, electron) @:jsRequire("electron", "Tray") extern class Tray extends js.node.events.EventEmitter<electron.main.Tray>
+@:require(js, hxelectron) @:jsRequire("electron", "Tray") extern class Tray extends js.node.events.EventEmitter<electron.main.Tray>
 {
 	function new(image:Dynamic) : Void;
 	/**
@@ -53,7 +53,7 @@ package electron.main;
 
 /**
 **/
-@:require(js, electron) @:enum abstract TrayEvent(String) from String to String
+@:require(js, hxelectron) @:enum abstract TrayEvent(String) from String to String
 {
 	/**
 	 Emitted when the tray icon is clicked.

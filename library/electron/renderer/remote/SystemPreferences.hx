@@ -2,7 +2,7 @@ package electron.renderer.remote;
 
 /**
 **/
-@:require(js, electron) @:jsRequire("electron", "remote.systemPreferences") extern class SystemPreferences
+@:require(js, hxelectron) @:jsRequire("electron", "remote.systemPreferences") extern class SystemPreferences
 {
 	static function isDarkMode() : Bool;
 	static function isSwipeTrackingFromScrollEventsEnabled() : Bool;

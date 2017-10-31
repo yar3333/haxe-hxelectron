@@ -2,7 +2,7 @@ package electron.main;
 
 /**
 **/
-@:require(js, electron) @:jsRequire("electron", "powerMonitor") extern class PowerMonitor
+@:require(js, hxelectron) @:jsRequire("electron", "powerMonitor") extern class PowerMonitor
 {
 
 }

@@ -5,7 +5,7 @@ package electron.renderer.remote;
 
 	See: <http://electron.atom.io/docs/api/browser-view>
 **/
-@:require(js, electron) @:jsRequire("electron", "remote.BrowserView") extern class BrowserView
+@:require(js, hxelectron) @:jsRequire("electron", "remote.BrowserView") extern class BrowserView
 {
 	/**
 	 A WebContents object owned by this view.

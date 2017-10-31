@@ -2,7 +2,7 @@ package electron;
 
 /**
 **/
-@:require(js, electron) abstract Accelerator(String) from String to String
+@:require(js, hxelectron) abstract Accelerator(String) from String to String
 {
 
 }

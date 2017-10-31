@@ -5,7 +5,7 @@ package electron.main;
 
 	See: <http://electron.atom.io/docs/api/web-contents>
 **/
-@:require(js, electron) @:jsRequire("electron", "WebContents") extern class WebContents extends js.node.events.EventEmitter<electron.main.WebContents>
+@:require(js, hxelectron) @:jsRequire("electron", "WebContents") extern class WebContents extends js.node.events.EventEmitter<electron.main.WebContents>
 {
 	/**
 	 A Integer representing the unique ID of this WebContents.
@@ -389,7 +389,7 @@ package electron.main;
 
 /**
 **/
-@:require(js, electron) @:enum abstract WebContentsEvent(String) from String to String
+@:require(js, hxelectron) @:enum abstract WebContentsEvent(String) from String to String
 {
 	/**
 	 Emitted when the navigation is done, i.e. the spinner of the tab has stopped spinning, and the onload event was dispatched.

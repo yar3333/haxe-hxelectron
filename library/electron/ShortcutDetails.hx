@@ -3,7 +3,7 @@ package electron;
 /**
 	See: <http://electron.atom.io/docs/api/structures/shortcut-details>
 **/
-@:require(js, electron) typedef ShortcutDetails =
+@:require(js, hxelectron) typedef ShortcutDetails =
 {
 	/**
 	 The target to launch from this shortcut.

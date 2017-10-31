@@ -5,7 +5,7 @@ package electron.renderer.remote;
 
 	See: <http://electron.atom.io/docs/api/cookies>
 **/
-@:require(js, electron) @:jsRequire("electron", "remote.Cookies") extern class Cookies extends js.node.events.EventEmitter<electron.main.Cookies>
+@:require(js, hxelectron) @:jsRequire("electron", "remote.Cookies") extern class Cookies extends js.node.events.EventEmitter<electron.main.Cookies>
 {
 	/**
 	 Sends a request to get all cookies matching details, callback will be called with callback(error, cookies) on complete. cookies is an Array of cookie objects.
@@ -69,7 +69,7 @@ package electron.renderer.remote;
 
 /**
 **/
-@:require(js, electron) @:enum abstract CookiesEvent(String) from String to String
+@:require(js, hxelectron) @:enum abstract CookiesEvent(String) from String to String
 {
 	/**
 	 Emitted when a cookie is changed because it was added, edited, removed, or expired.

@@ -5,7 +5,7 @@ package electron.renderer.remote;
 
 	See: <http://electron.atom.io/docs/api/incoming-message>
 **/
-@:require(js, electron) @:jsRequire("electron", "remote.IncomingMessage") extern class IncomingMessage extends js.node.events.EventEmitter<electron.main.IncomingMessage>
+@:require(js, hxelectron) @:jsRequire("electron", "remote.IncomingMessage") extern class IncomingMessage extends js.node.events.EventEmitter<electron.main.IncomingMessage>
 {
 	/**
 	 An Integer indicating the HTTP response status code.
@@ -35,7 +35,7 @@ package electron.renderer.remote;
 
 /**
 **/
-@:require(js, electron) @:enum abstract IncomingMessageEvent(String) from String to String
+@:require(js, hxelectron) @:enum abstract IncomingMessageEvent(String) from String to String
 {
 	/**
 	 The data event is the usual method of transferring response data into applicative code.

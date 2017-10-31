@@ -5,7 +5,7 @@ package electron.main;
 
 	See: <http://electron.atom.io/docs/api/debugger>
 **/
-@:require(js, electron) @:jsRequire("electron", "Debugger") extern class Debugger extends js.node.events.EventEmitter<electron.main.Debugger>
+@:require(js, hxelectron) @:jsRequire("electron", "Debugger") extern class Debugger extends js.node.events.EventEmitter<electron.main.Debugger>
 {
 	/**
 	 Attaches the debugger to the webContents.
@@ -24,7 +24,7 @@ package electron.main;
 
 /**
 **/
-@:require(js, electron) @:enum abstract DebuggerEvent(String) from String to String
+@:require(js, hxelectron) @:enum abstract DebuggerEvent(String) from String to String
 {
 	/**
 	 Emitted when debugging session is terminated. This happens either when webContents is closed or devtools is invoked for the attached webContents.

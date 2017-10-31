@@ -2,7 +2,7 @@ package electron.renderer.remote;
 
 /**
 **/
-@:require(js, electron) @:jsRequire("electron", "remote.ipcMain") extern class IpcMain
+@:require(js, hxelectron) @:jsRequire("electron", "remote.ipcMain") extern class IpcMain
 {
 	/**
 	 Listens to channel, when a new message arrives listener would be called with listener(event, args...).

@@ -5,7 +5,7 @@ package electron.renderer.remote;
 
 	See: <http://electron.atom.io/docs/api/download-item>
 **/
-@:require(js, electron) @:jsRequire("electron", "remote.DownloadItem") extern class DownloadItem extends js.node.events.EventEmitter<electron.main.DownloadItem>
+@:require(js, hxelectron) @:jsRequire("electron", "remote.DownloadItem") extern class DownloadItem extends js.node.events.EventEmitter<electron.main.DownloadItem>
 {
 	/**
 	 The API is only available in session's will-download callback function. If user doesn't set the save path via the API, Electron will use the original routine to determine the save path(Usually prompts a save dialog).
@@ -54,7 +54,7 @@ package electron.renderer.remote;
 
 /**
 **/
-@:require(js, electron) @:enum abstract DownloadItemEvent(String) from String to String
+@:require(js, hxelectron) @:enum abstract DownloadItemEvent(String) from String to String
 {
 	/**
 	 Emitted when the download has been updated and is not done. The state can be one of following:

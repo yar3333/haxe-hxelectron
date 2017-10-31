@@ -5,7 +5,7 @@ package electron;
 
 	See: <http://electron.atom.io/docs/api/native-image>
 **/
-@:require(js, electron) @:jsRequire("electron", "NativeImage") extern class NativeImage
+@:require(js, hxelectron) @:jsRequire("electron", "NativeImage") extern class NativeImage
 {
 	function toPNG(?options:{ /**
 	 Defaults to 1.0.

@@ -3,7 +3,7 @@ package electron;
 /**
 	See: <http://electron.atom.io/docs/api/structures/rectangle>
 **/
-@:require(js, electron) typedef Rectangle =
+@:require(js, hxelectron) typedef Rectangle =
 {
 	/**
 	 The x coordinate of the origin of the rectangle

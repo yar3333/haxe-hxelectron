@@ -2,4 +2,4 @@ package electron;
 
 /**
 **/
-@:require(js, electron) typedef MenuItemConstructorOptions = Dynamic;
+@:require(js, hxelectron) typedef MenuItemConstructorOptions = Dynamic;

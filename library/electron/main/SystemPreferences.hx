@@ -2,7 +2,7 @@ package electron.main;
 
 /**
 **/
-@:require(js, electron) @:jsRequire("electron", "systemPreferences") extern class SystemPreferences
+@:require(js, hxelectron) @:jsRequire("electron", "systemPreferences") extern class SystemPreferences
 {
 	static function isDarkMode() : Bool;
 	static function isSwipeTrackingFromScrollEventsEnabled() : Bool;

@@ -3,7 +3,7 @@ package electron;
 /**
 	See: <http://electron.atom.io/docs/api/structures/memory-info>
 **/
-@:require(js, electron) typedef MemoryInfo =
+@:require(js, hxelectron) typedef MemoryInfo =
 {
 	/**
 	 Process id of the process.

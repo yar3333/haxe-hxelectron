@@ -491,7 +491,7 @@ class ElectronAPI
 
 	static function createTypeDefinition(pack:Array<String>, name:String, kind:TypeDefKind, ?fields:Array<Field>, ?meta:Metadata, ?isExtern:Bool) : TypeDefinition
 	{
-		var _meta = [{ name: ':require', params: [macro $i{'js'},macro $i{'electron' }], pos:pos }];
+		var _meta = [{ name: ':require', params: [macro $i{'js'},macro $i{'hxelectron' }], pos:pos }];
 		if (meta != null) _meta = _meta.concat(meta);
 		return
 		{

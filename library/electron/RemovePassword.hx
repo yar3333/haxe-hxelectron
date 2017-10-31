@@ -3,7 +3,7 @@ package electron;
 /**
 	See: <http://electron.atom.io/docs/api/structures/remove-password>
 **/
-@:require(js, electron) typedef RemovePassword =
+@:require(js, hxelectron) typedef RemovePassword =
 {
 	/**
 	 password.
