@@ -42,7 +42,7 @@
     <hidden path="produce-remote.cmd" />
   </hiddenPaths>
   <!-- Executed before build -->
-  <preBuildCommand />
+  <preBuildCommand>cmd /c rmdir /s /q ..\library\electron</preBuildCommand>
   <!-- Executed after build -->
   <postBuildCommand alwaysRun="False">neko bin\generator.n
 produce-remote.cmd</postBuildCommand>
