@@ -140,7 +140,7 @@ package electron.renderer.remote;
 
 /**
 **/
-@:require(js, hxelectron) @:enum abstract SessionEvent(String) from String to String
+@:require(js, hxelectron) enum abstract SessionEvent(String) from String to String
 {
 	/**
 	 Emitted when Electron is about to download item in webContents. Calling event.preventDefault() will cancel the download and item will not be available from next tick of the process.

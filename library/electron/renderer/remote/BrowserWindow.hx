@@ -612,7 +612,7 @@ package electron.renderer.remote;
 
 /**
 **/
-@:require(js, hxelectron) @:enum abstract BrowserWindowEvent(String) from String to String
+@:require(js, hxelectron) enum abstract BrowserWindowEvent(String) from String to String
 {
 	/**
 	 Emitted when the document changed its title, calling event.preventDefault() will prevent the native window's title from changing.

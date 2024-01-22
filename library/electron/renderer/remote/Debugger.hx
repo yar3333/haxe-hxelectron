@@ -24,7 +24,7 @@ package electron.renderer.remote;
 
 /**
 **/
-@:require(js, hxelectron) @:enum abstract DebuggerEvent(String) from String to String
+@:require(js, hxelectron) enum abstract DebuggerEvent(String) from String to String
 {
 	/**
 	 Emitted when debugging session is terminated. This happens either when webContents is closed or devtools is invoked for the attached webContents.

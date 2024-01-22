@@ -102,7 +102,7 @@ package electron.renderer.remote;
 	/**
 	 Evaluates code in page. In the browser window some HTML APIs like requestFullScreen can only be invoked by a gesture from the user. Setting userGesture to true will remove this limitation. If the result of the executed code is a promise the callback result will be the resolved value of the promise.  We recommend that you use the returned Promise to handle code that results in a Promise.
 	 */
-	function executeJavaScript(code:String, ?userGesture:Bool, ?callback:haxe.Constraints.Function) : js.Promise<Dynamic>;
+	function executeJavaScript(code:String, ?userGesture:Bool, ?callback:haxe.Constraints.Function) : js.lib.Promise<Dynamic>;
 	/**
 	 Mute the audio on the current web page.
 	 */
@@ -389,7 +389,7 @@ package electron.renderer.remote;
 
 /**
 **/
-@:require(js, hxelectron) @:enum abstract WebContentsEvent(String) from String to String
+@:require(js, hxelectron) enum abstract WebContentsEvent(String) from String to String
 {
 	/**
 	 Emitted when the navigation is done, i.e. the spinner of the tab has stopped spinning, and the onload event was dispatched.
