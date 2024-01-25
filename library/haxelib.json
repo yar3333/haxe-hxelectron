@@ -1,6 +1,6 @@
 {
   "name": "hxelectron",
-  "url": "https://bitbucket.org/yar3333/haxe-hxelectron",
+  "url": "https://github.com/yar3333/haxe-hxelectron",
   "license": "MIT",
   "tags": ["electron","node","desktop"],
   "description": "Externs for the electron framework",
