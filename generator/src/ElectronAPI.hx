@@ -53,7 +53,7 @@ typedef APIProcess =
 	var renderer : Bool;
 }
 
-@:enum abstract APIType(String) from String to String
+enum abstract APIType(String) from String to String
 {
 	var Module = "Module";
 	var Class_ = "Class";
@@ -280,7 +280,7 @@ class ElectronAPI
 		if (method.parameters != null)
 		{
 			for (p in method.parameters) {
-				var type = Std.is(p.type, Array) ? 'Object' : p.type;
+				var type = Std.isOfType(p.type, Array) ? 'Object' : p.type;
 				switch p.name
 				{
 					case '...args':
@@ -446,7 +446,7 @@ class ElectronAPI
 						}]
 					);
 				}
-			case 'Promise': macro : js.Promise<Dynamic>;
+			case 'Promise': macro : js.lib.Promise<Dynamic>;
 			case 'String','URL': macro : String;
 			case _ if (multiType != null) : multiType;
 			default: TPath( { pack: [], name:escapeTypeName(type) } );
@@ -537,7 +537,7 @@ class ElectronAPI
 		var _pack = pack.copy();
 		var _name = escapeTypeName(name);
 		_pack.push(_name);
-		return createTypeDefinition(_pack, _name + 'Event', TDAbstract(macro:String, [macro:String], [macro:String]), fields, [{ name: ":enum", pos:pos }]);
+		return createTypeDefinition(_pack, _name + 'Event', TDAbstract(macro:String, [ AbEnum ], [ macro:String ], [ macro:String ]), fields);
 	}
 	
 	static function escapeTypeName(name:String) : String return name.charAt(0).toUpperCase() + name.substr(1);

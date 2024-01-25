@@ -44,7 +44,7 @@ package electron.renderer.remote;
 
 /**
 **/
-@:require(js, hxelectron) @:enum abstract ClientRequestEvent(String) from String to String
+@:require(js, hxelectron) enum abstract ClientRequestEvent(String) from String to String
 {
 	var response : String = "response";
 	/**

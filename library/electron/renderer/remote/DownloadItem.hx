@@ -54,7 +54,7 @@ package electron.renderer.remote;
 
 /**
 **/
-@:require(js, hxelectron) @:enum abstract DownloadItemEvent(String) from String to String
+@:require(js, hxelectron) enum abstract DownloadItemEvent(String) from String to String
 {
 	/**
 	 Emitted when the download has been updated and is not done. The state can be one of following:

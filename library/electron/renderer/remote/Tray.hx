@@ -53,7 +53,7 @@ package electron.renderer.remote;
 
 /**
 **/
-@:require(js, hxelectron) @:enum abstract TrayEvent(String) from String to String
+@:require(js, hxelectron) enum abstract TrayEvent(String) from String to String
 {
 	/**
 	 Emitted when the tray icon is clicked.

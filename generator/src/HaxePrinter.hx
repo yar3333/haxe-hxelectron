@@ -16,6 +16,7 @@ class HaxePrinter {
 		case OpNot: "!";
 		case OpNeg: "-";
 		case OpNegBits: "~";
+        case OpSpread: "...";
 	}
 
 	public function printBinop(op:Binop) return switch(op) {
@@ -44,7 +45,10 @@ class HaxePrinter {
 		case OpAssignOp(op):
 			printBinop(op)
 			+ "=";
-	}
+        case OpIn: "in";
+        case OpNullCoal: "??";
+    }
+
 	public function printString(s:String) {
 		return '"' + s.split("\n").join("\\n").split("\t").join("\\t").split("'").join("\\'").split('"').join("\\\"") #if sys .split("\x00").join("\\x00") #end + '"';
 	}
@@ -77,11 +81,13 @@ class HaxePrinter {
 		case TParent(ct): "(" + printComplexType(ct) + ")";
 		case TOptional(ct): "?" + printComplexType(ct);
 		case TExtend(tpl, fields): '{> ${tpl.map(printTypePath).join(" >, ")}, ${fields.map(printField).join(", ")} }';
+        case TIntersection(tl): [for (t in tl) printComplexType(t)].join("&");
+        case TNamed(n, t): printComplexType(t);
 	}
 
 	public function printMetadata(meta:MetadataEntry) return
 		'@${meta.name}'
-	+ (meta.params != null && meta.params.length > 0 ? '(${printExprs(meta.params,", ")})' : "");
+	  + (meta.params != null && meta.params.length > 0 ? '(${printExprs(meta.params,", ")})' : "");
 
 	public function printAccess(access:Access) return switch(access) {
 		case AStatic: "static";
@@ -91,6 +97,10 @@ class HaxePrinter {
 		case AInline: "inline";
 		case ADynamic: "dynamic";
 		case AMacro: "macro";
+		case AAbstract: "abstract";
+		case AExtern: "extern";
+		case AFinal: "final";
+		case AOverload: "overload";
 	}
 
 	public function printFieldSingleLine(field:Field)
@@ -173,7 +183,6 @@ class HaxePrinter {
 			tabs = old;
 			s + ';\n$tabs}';
 		case EFor(e1, e2): 'for (${printExpr(e1)}) ${printExpr(e2)}';
-		case EIn(e1, e2): '${printExpr(e1)} in ${printExpr(e2)}';
 		case EIf(econd, eif, null): 'if (${printExpr(econd)}) ${printExpr(eif)}';
 		case EIf(econd, eif, eelse): 'if (${printExpr(econd)}) ${printExpr(eif)} else ${printExpr(eelse)}';
 		case EWhile(econd, e1, true): 'while (${printExpr(econd)}) ${printExpr(e1)}';
@@ -202,10 +211,10 @@ class HaxePrinter {
 		case ECast(e1, cto) if (cto != null): 'cast(${printExpr(e1)}, ${printComplexType(cto)})';
 		case ECast(e1, _): "cast " +printExpr(e1);
 		case EDisplay(e1, _): '#DISPLAY(${printExpr(e1)})';
-		case EDisplayNew(tp): '#DISPLAY(${printTypePath(tp)})';
 		case ETernary(econd, eif, eelse): '${printExpr(econd)} ? ${printExpr(eif)} : ${printExpr(eelse)}';
 		case ECheckType(e1, ct): '(${printExpr(e1)} : ${printComplexType(ct)})';
 		case EMeta(meta, e1): printMetadata(meta) + " " +printExpr(e1);
+        case EIs(e, t): printExpr(e) + " is " + printComplexType(t);
 	}
 
 	public function printExprs(el:Array<Expr>, sep:String) {
@@ -272,8 +281,8 @@ class HaxePrinter {
 						case _: " " + printComplexType(ct);
 					})
 					+ ";";
-				case TDAbstract(tthis, from, to):
-					"abstract " + t.name
+				case TDAbstract(tthis, flags, from, to):
+					(flags != null && flags.exists(x -> x == AbEnum) ? "enum " : "") + "abstract " + t.name
 					+ (t.params != null && t.params.length > 0 ? "<" + t.params.map(printTypeParamDecl).join(", ") + ">" : "")
 					+ (tthis == null ? "" : "(" + printComplexType(tthis) + ")")
 					+ (from == null ? "" : [for (f in from) " from " + printComplexType(f)].join(""))
@@ -288,6 +297,8 @@ class HaxePrinter {
 						};
 					}].join("\n")
 					+ "\n}";
+                case TDField(kind, access):
+                    printField({ kind: kind, access: access, name: t.name, meta: t.meta, pos: t.pos });
 			}
 
 		tabs = old;

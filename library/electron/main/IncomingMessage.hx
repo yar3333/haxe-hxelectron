@@ -35,7 +35,7 @@ package electron.main;
 
 /**
 **/
-@:require(js, hxelectron) @:enum abstract IncomingMessageEvent(String) from String to String
+@:require(js, hxelectron) enum abstract IncomingMessageEvent(String) from String to String
 {
 	/**
 	 The data event is the usual method of transferring response data into applicative code.

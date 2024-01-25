@@ -1,0 +1,6 @@
+--neko bin\generator.n
+--class-path src
+--library stdlib
+--main Main
+--cmd neko bin\generator.n 
+--cmd produce-remote.cmd

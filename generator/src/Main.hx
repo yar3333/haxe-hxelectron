@@ -13,6 +13,8 @@ class Main
 		var out = '../library';
 		
 		if (!FileSystem.exists(file)) error('API file not found [$file]');
+
+        stdlib.FileSystem.deleteDirectory(out + "/electron");
 		
 		var pack = ['electron'];
 		var json = Json.parse(File.getContent(file));
