@@ -1,16 +1,21 @@
 package electron;
 
 /**
-	See: <http://electron.atom.io/docs/api/structures/process-memory-info>
+	
+
+	See: <https://electronjs.org/docs/api/structures/process-memory-info>
 **/
-@:require(js, hxelectron) typedef ProcessMemoryInfo =
-{
+@:require(js, hxelectron) typedef ProcessMemoryInfo = {
 	/**
-	 Process id of the process.
-	 */
-	var pid : Int;
+		The amount of memory currently pinned to actual physical RAM in Kilobytes.
+	**/
+	var residentSet : Int;
 	/**
-	 Memory information of the process.
-	 */
-	var memory : MemoryInfo;
+		The amount of memory not shared by other processes, such as JS heap or HTML content in Kilobytes.
+	**/
+	var private : Int;
+	/**
+		The amount of memory shared between processes, typically memory consumed by the Electron code itself in Kilobytes.
+	**/
+	var shared : Int;
 }

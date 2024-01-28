@@ -1,16 +1,17 @@
 package electron;
 
 /**
-	See: <http://electron.atom.io/docs/api/structures/upload-raw-data>
+	
+
+	See: <https://electronjs.org/docs/api/structures/upload-raw-data>
 **/
-@:require(js, hxelectron) typedef UploadRawData =
-{
+@:require(js, hxelectron) typedef UploadRawData = {
 	/**
-	 rawData.
-	 */
-	var type : String;
+		`rawData`.
+	**/
+	var type : 'rawData';
 	/**
-	 Data to be uploaded.
-	 */
+		Data to be uploaded.
+	**/
 	var bytes : js.node.Buffer;
 }

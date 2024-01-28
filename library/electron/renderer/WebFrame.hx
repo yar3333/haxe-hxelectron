@@ -2,78 +2,139 @@ package electron.renderer;
 
 /**
 **/
-@:require(js, hxelectron) @:jsRequire("electron", "webFrame") extern class WebFrame
-{
+@:require(js, hxelectron) @:jsRequire("electron", "webFrame") extern class WebFrame {
 	/**
-	 Changes the zoom factor to the specified factor. Zoom factor is zoom percent divided by 100, so 300% = 3.0.
-	 */
-	static function setZoomFactor(factor:Float) : Void;
-	static function getZoomFactor() : Float;
+		Changes the zoom factor to the specified factor. Zoom factor is zoom percent divided by 100, so 300% = 3.0.
+		
+		The factor must be greater than 0.0.
+	**/
+	static function setZoomFactor(factor:Float):Void;
 	/**
-	 Changes the zoom level to the specified level. The original size is 0 and each increment above or below represents zooming 20% larger or smaller to default limits of 300% and 50% of original size, respectively.
-	 */
-	static function setZoomLevel(level:Float) : Void;
-	static function getZoomLevel() : Float;
+		The current zoom factor.
+	**/
+	static function getZoomFactor():Float;
 	/**
-	 Deprecated: Call setVisualZoomLevelLimits instead to set the visual zoom level limits. This method will be removed in Electron 2.0.
-	 */
-	static function setZoomLevelLimits(minimumLevel:Float, maximumLevel:Float) : Void;
+		Changes the zoom level to the specified level. The original size is 0 and each increment above or below represents zooming 20% larger or smaller to default limits of 300% and 50% of original size, respectively.
+		
+		> **NOTE**: The zoom policy at the Chromium level is same-origin, meaning that the zoom level for a specific domain propagates across all instances of windows with the same domain. Differentiating the window URLs will make zoom work per-window.
+	**/
+	static function setZoomLevel(level:Float):Void;
 	/**
-	 Sets the maximum and minimum pinch-to-zoom level.
-	 */
-	static function setVisualZoomLevelLimits(minimumLevel:Float, maximumLevel:Float) : Void;
+		The current zoom level.
+	**/
+	static function getZoomLevel():Float;
 	/**
-	 Sets the maximum and minimum layout-based (i.e. non-visual) zoom level.
-	 */
-	static function setLayoutZoomLevelLimits(minimumLevel:Float, maximumLevel:Float) : Void;
+		Sets the maximum and minimum pinch-to-zoom level.
+		
+		> **NOTE**: Visual zoom is disabled by default in Electron. To re-enable it, call:
+		
+		> **NOTE**: Visual zoom only applies to pinch-to-zoom behavior. Cmd+/-/0 zoom shortcuts are controlled by the 'zoomIn', 'zoomOut', and 'resetZoom' MenuItem roles in the application Menu. To disable shortcuts, manually define the Menu and omit zoom roles from the definition.
+	**/
+	static function setVisualZoomLevelLimits(minimumLevel:Float, maximumLevel:Float):Void;
 	/**
-	 Sets a provider for spell checking in input fields and text areas. The provider must be an object that has a spellCheck method that returns whether the word passed is correctly spelled. An example of using node-spellchecker as provider:
-	 */
-	static function setSpellCheckProvider(language:String, autoCorrectWord:Bool, provider:{ /**
-	 Returns Boolean
-	 */
-	@:optional var spellCheck : haxe.Constraints.Function; }) : Void;
+		Sets a provider for spell checking in input fields and text areas.
+		
+		If you want to use this method you must disable the builtin spellchecker when you construct the window.
+		
+		The `provider` must be an object that has a `spellCheck` method that accepts an array of individual words for spellchecking. The `spellCheck` function runs asynchronously and calls the `callback` function with an array of misspelt words when complete.
+		
+		An example of using node-spellchecker as provider:
+	**/
+	static function setSpellCheckProvider(language:String, provider:{ @:optional
+	var spellCheck : haxe.Constraints.Function; }):Void;
 	/**
-	 Registers the scheme as secure scheme. Secure schemes do not trigger mixed content warnings. For example, https and data are secure schemes because they cannot be corrupted by active network attackers.
-	 */
-	static function registerURLSchemeAsSecure(scheme:String) : Void;
+		A key for the inserted CSS that can later be used to remove the CSS via `webFrame.removeInsertedCSS(key)`.
+		
+		Injects CSS into the current web page and returns a unique key for the inserted stylesheet.
+	**/
+	static function insertCSS(css:String, ?options:{ /**
+		Can be 'user' or 'author'. Sets the cascade origin of the inserted stylesheet. Default is 'author'.
+	**/
+	@:optional
+	var cssOrigin : String; }):String;
 	/**
-	 Resources will be loaded from this scheme regardless of the current page's Content Security Policy.
-	 */
-	static function registerURLSchemeAsBypassingCSP(scheme:String) : Void;
+		Removes the inserted CSS from the current web page. The stylesheet is identified by its key, which is returned from `webFrame.insertCSS(css)`.
+	**/
+	static function removeInsertedCSS(key:String):Void;
 	/**
-	 Registers the scheme as secure, bypasses content security policy for resources, allows registering ServiceWorker and supports fetch API. Specify an option with the value of false to omit it from the registration. An example of registering a privileged scheme, without bypassing Content Security Policy:
-	 */
-	static function registerURLSchemeAsPrivileged(scheme:String, ?options:{ /**
-	 Default true.
-	 */
-	@:optional var secure : Bool; /**
-	 Default true.
-	 */
-	@:optional var bypassCSP : Bool; /**
-	 Default true.
-	 */
-	@:optional var allowServiceWorkers : Bool; /**
-	 Default true.
-	 */
-	@:optional var supportFetchAPI : Bool; /**
-	 Default true.
-	 */
-	@:optional var corsEnabled : Bool; }) : Void;
+		Inserts `text` to the focused element.
+	**/
+	static function insertText(text:String):Void;
 	/**
-	 Inserts text to the focused element.
-	 */
-	static function insertText(text:String) : Void;
+		A promise that resolves with the result of the executed code or is rejected if execution throws or results in a rejected promise.
+		
+		Evaluates `code` in page.
+		
+		In the browser window some HTML APIs like `requestFullScreen` can only be invoked by a gesture from the user. Setting `userGesture` to `true` will remove this limitation.
+	**/
+	static function executeJavaScript(code:String, ?userGesture:Bool, ?callback:haxe.Constraints.Function):js.lib.Promise<Dynamic>;
 	/**
-	 Evaluates code in page. In the browser window some HTML APIs like requestFullScreen can only be invoked by a gesture from the user. Setting userGesture to true will remove this limitation.
-	 */
-	static function executeJavaScript(code:String, ?userGesture:Bool, ?callback:haxe.Constraints.Function) : js.lib.Promise<Dynamic>;
+		A promise that resolves with the result of the executed code or is rejected if execution could not start.
+		
+		Works like `executeJavaScript` but evaluates `scripts` in an isolated context.
+		
+		Note that when the execution of script fails, the returned promise will not reject and the `result` would be `undefined`. This is because Chromium does not dispatch errors of isolated worlds to foreign worlds.
+	**/
+	static function executeJavaScriptInIsolatedWorld(worldId:Int, scripts:Array<WebSource>, ?userGesture:Bool, ?callback:haxe.Constraints.Function):js.lib.Promise<Dynamic>;
 	/**
-	 Returns an object describing usage information of Blink's internal memory caches. This will generate:
-	 */
-	static function getResourceUsage() : { @:optional var images : MemoryUsageDetails; @:optional var cssStyleSheets : MemoryUsageDetails; @:optional var xslStyleSheets : MemoryUsageDetails; @:optional var fonts : MemoryUsageDetails; @:optional var other : MemoryUsageDetails; };
+		Set the security origin, content security policy and name of the isolated world. Note: If the `csp` is specified, then the `securityOrigin` also has to be specified.
+	**/
+	static function setIsolatedWorldInfo(worldId:Int, info:{ /**
+		Security origin for the isolated world.
+	**/
+	@:optional
+	var securityOrigin : String; /**
+		Content Security Policy for the isolated world.
+	**/
+	@:optional
+	var csp : String; /**
+		Name for isolated world. Useful in devtools.
+	**/
+	@:optional
+	var name : String; }):Void;
 	/**
-	 Attempts to free memory that is no longer being used (like images from a previous navigation). Note that blindly calling this method probably makes Electron slower since it will have to refill these emptied caches, you should only call it if an event in your app has occurred that makes you think your page is actually using less memory (i.e. you have navigated from a super heavy page to a mostly empty one, and intend to stay there).
-	 */
-	static function clearCache() : Void;
+		* `images` MemoryUsageDetails
+		* `scripts` MemoryUsageDetails
+		* `cssStyleSheets` MemoryUsageDetails
+		* `xslStyleSheets` MemoryUsageDetails
+		* `fonts` MemoryUsageDetails
+		* `other` MemoryUsageDetails
+		
+		Returns an object describing usage information of Blink's internal memory caches.
+		
+		This will generate:
+	**/
+	static function getResourceUsage():{ @:optional
+	var images : MemoryUsageDetails; @:optional
+	var scripts : MemoryUsageDetails; @:optional
+	var cssStyleSheets : MemoryUsageDetails; @:optional
+	var xslStyleSheets : MemoryUsageDetails; @:optional
+	var fonts : MemoryUsageDetails; @:optional
+	var other : MemoryUsageDetails; };
+	/**
+		Attempts to free memory that is no longer being used (like images from a previous navigation).
+		
+		Note that blindly calling this method probably makes Electron slower since it will have to refill these emptied caches, you should only call it if an event in your app has occurred that makes you think your page is actually using less memory (i.e. you have navigated from a super heavy page to a mostly empty one, and intend to stay there).
+	**/
+	static function clearCache():Void;
+	/**
+		The frame element in `webFrame's` document selected by `selector`, `null` would be returned if `selector` does not select a frame or if the frame is not in the current renderer process.
+	**/
+	static function getFrameForSelector(selector:String):WebFrame;
+	/**
+		A child of `webFrame` with the supplied `name`, `null` would be returned if there's no such frame or if the frame is not in the current renderer process.
+	**/
+	static function findFrameByName(name:String):WebFrame;
+	/**
+		that has the supplied `routingId`, `null` if not found.
+	**/
+	static function findFrameByRoutingId(routingId:Int):WebFrame;
+	/**
+		True if the word is misspelled according to the built in spellchecker, false otherwise. If no dictionary is loaded, always return false.
+	**/
+	static function isWordMisspelled(word:String):Bool;
+	/**
+		A list of suggested words for a given word. If the word is spelled correctly, the result will be empty.
+	**/
+	static function getWordSuggestions(word:String):Array<String>;
 }

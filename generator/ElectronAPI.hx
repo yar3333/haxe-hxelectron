@@ -103,7 +103,7 @@ class ElectronAPI
         
         if (!FileSystem.exists(file)) { Sys.println('API file not found `$file`.'); Sys.exit(1); }
 
-        stdlib.FileSystem.deleteDirectory(out + "/electron");
+        deleteDirectory(out + "/electron");
         
         var pack = ['electron'];
         var electronApiJsonText = File.getContent(file);
@@ -181,7 +181,7 @@ class ElectronAPI
 
 		for (item in api)
 		{
-			var ntypes = convertItem(item, pack);
+            var ntypes = convertItem(item, pack);
 			for (ntype in ntypes)
 			{
 				if (ntype == null)
@@ -398,8 +398,8 @@ class ElectronAPI
 
 		inline function isKnownType(type:String) : Bool
 		{
-			var known = ['Bool','Boolean','Buffer','Int','Integer','Dynamic','Double','Float','Number','Function','Object','Promise','String','URL'];
-			return known.indexOf(type) > -1;
+			var known = ['bool','boolean','buffer','int','integer','dynamic','double','float','number','function','object','promise','string','URL'];
+			return known.indexOf(type.toLowerCase()) > -1;
 		}
 
 		inline function findMatch(type:String) : Null<{ name:String, pack:Array<String>}>
@@ -492,15 +492,15 @@ class ElectronAPI
 			null;
 		}
 
-		var ctype = switch type
+		var ctype = switch type.toLowerCase()
 		{
-			case 'Blob': macro : js.html.Blob;
-			case 'Bool','Boolean': macro : Bool;
-			case 'Buffer': macro : js.node.Buffer;
-			case 'Int','Integer': macro : Int;
-			case 'Dynamic': macro : Dynamic;// Allows to explicit set type to Dynamic
-			case 'Double','Float','Number': macro : Float;
-			case 'Function':
+			case 'blob': macro : js.html.Blob;
+			case 'bool','boolean': macro : Bool;
+			case 'buffer': macro : js.node.Buffer;
+			case 'int','integer': macro : Int;
+			case 'dynamic': macro : Dynamic;// Allows to explicit set type to Dynamic
+			case 'double','float','number': macro : Float;
+			case 'function':
 				if (properties == null) macro : haxe.Constraints.Function;
 				else
 				{
@@ -511,7 +511,7 @@ class ElectronAPI
 						macro : Dynamic
 					);
 				}
-			case 'Object':
+			case 'object':
 				if (properties == null) macro : Dynamic else
 				{
 					TAnonymous
@@ -526,8 +526,8 @@ class ElectronAPI
 						}]
 					);
 				}
-			case 'Promise': macro : js.lib.Promise<Dynamic>;
-			case 'String','URL': macro : String;
+			case 'promise': macro : js.lib.Promise<Dynamic>;
+			case 'string','URL': macro : String;
 			case _ if (multiType != null) : multiType;
 			default: TPath( { pack: [], name:escapeTypeName(type) } );
 		}
@@ -624,6 +624,26 @@ class ElectronAPI
 	static function escapeTypeName(name:String) : String return name.charAt(0).toUpperCase() + name.substr(1);
 	
 	static function escapeName(name:String) : String return (KWDS.indexOf(name) != -1) ? name + '_' : name;
+
+    public static function deleteDirectory(path:String) : Void
+    {
+        if (FileSystem.exists(path))
+        {
+            for (file in FileSystem.readDirectory(path))
+            {
+                var s = path + "/" + file;
+                if (FileSystem.isDirectory(s))
+                {
+                    deleteDirectory(s);
+                }
+                else
+                {
+                    FileSystem.deleteFile(s);
+                }
+            }
+            sys.FileSystem.deleteDirectory(path);
+        }
+    }    
 }
 
 abstract SafeEitherType<A, B>(Dynamic) from A from B

@@ -1,15 +1,28 @@
 package electron.main;
 
 /**
-	Create TouchBar layouts for native macOS applications
+	
 
-	See: <http://electron.atom.io/docs/api/touch-bar>
+### Class: TouchBar
+
+> Create TouchBar layouts for native macOS applications
+
+Process: Main
+
+	See: <https://electronjs.org/docs/api/touch-bar>
 **/
-@:require(js, hxelectron) @:jsRequire("electron", "TouchBar") extern class TouchBar
-{
+@:require(js, hxelectron) @:jsRequire("electron", "TouchBar") extern class TouchBar extends js.node.events.EventEmitter<electron.main.TouchBar> {
 	/**
-	 The TouchBarItem that will replace the "esc" button on the touch bar when set. Setting to null restores the default "esc" button. Changing this value immediately updates the escape item in the touch bar.
-	 */
-	var escapeItem : Dynamic;
-	function new(items:Array<Dynamic>) : Void;
+		A `TouchBarItem` that will replace the "esc" button on the touch bar when set. Setting to `null` restores the default "esc" button. Changing this value immediately updates the escape item in the touch bar.
+	**/
+	var escapeItem : TouchBarItem;
+	function new(options:{ @:optional
+	var items : Array<Dynamic>; @:optional
+	var escapeItem : Dynamic; }):Void;
+}
+
+/**
+**/
+@:require(js, hxelectron) enum abstract TouchBarEvent(String) from String to String {
+
 }

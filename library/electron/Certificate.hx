@@ -1,48 +1,49 @@
 package electron;
 
 /**
-	See: <http://electron.atom.io/docs/api/structures/certificate>
+	
+
+	See: <https://electronjs.org/docs/api/structures/certificate>
 **/
-@:require(js, hxelectron) typedef Certificate =
-{
+@:require(js, hxelectron) typedef Certificate = {
 	/**
-	 PEM encoded data
-	 */
+		PEM encoded data
+	**/
 	var data : String;
 	/**
-	 Issuer principal
-	 */
+		Issuer principal
+	**/
 	var issuer : CertificatePrincipal;
 	/**
-	 Issuer's Common Name
-	 */
+		Issuer's Common Name
+	**/
 	var issuerName : String;
 	/**
-	 Issuer certificate (if not self-signed)
-	 */
+		Issuer certificate (if not self-signed)
+	**/
 	var issuerCert : Certificate;
 	/**
-	 Subject principal
-	 */
+		Subject principal
+	**/
 	var subject : CertificatePrincipal;
 	/**
-	 Subject's Common Name
-	 */
+		Subject's Common Name
+	**/
 	var subjectName : String;
 	/**
-	 Hex value represented string
-	 */
+		Hex value represented string
+	**/
 	var serialNumber : String;
 	/**
-	 Start date of the certificate being valid in seconds
-	 */
+		Start date of the certificate being valid in seconds
+	**/
 	var validStart : Float;
 	/**
-	 End date of the certificate being valid in seconds
-	 */
+		End date of the certificate being valid in seconds
+	**/
 	var validExpiry : Float;
 	/**
-	 Fingerprint of the certificate
-	 */
+		Fingerprint of the certificate
+	**/
 	var fingerprint : String;
 }

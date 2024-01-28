@@ -1,4 +1,3 @@
 --class-path .
---library stdlib
 --main ElectronAPI
 --interp

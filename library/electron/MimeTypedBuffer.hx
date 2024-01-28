@@ -1,16 +1,21 @@
 package electron;
 
 /**
-	See: <http://electron.atom.io/docs/api/structures/mime-typed-buffer>
+	
+
+	See: <https://electronjs.org/docs/api/structures/mime-typed-buffer>
 **/
-@:require(js, hxelectron) typedef MimeTypedBuffer =
-{
+@:require(js, hxelectron) typedef MimeTypedBuffer = {
 	/**
-	 The mimeType of the Buffer that you are sending
-	 */
+		MIME type of the buffer.
+	**/
 	var mimeType : String;
 	/**
-	 The actual Buffer content
-	 */
+		Charset of the buffer.
+	**/
+	var charset : String;
+	/**
+		The actual Buffer content.
+	**/
 	var data : js.node.Buffer;
 }
