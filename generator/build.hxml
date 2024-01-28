@@ -1,6 +1,4 @@
---neko bin\generator.n
---class-path src
+--class-path .
 --library stdlib
---main Main
---cmd neko bin\generator.n 
---cmd produce-remote.cmd
+--main ElectronAPI
+--interp

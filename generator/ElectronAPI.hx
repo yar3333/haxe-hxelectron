@@ -1,3 +1,7 @@
+import haxe.Json;
+import haxe.ds.StringMap;
+import sys.FileSystem;
+import sys.io.File;
 import haxe.macro.Expr;
 using StringTools;
 
@@ -21,7 +25,7 @@ typedef APIEvent =
 typedef APIMethodParameter =
 {
 	name : String,
-	type : String,
+	type : SafeEitherType<String, Array<APIType>>,
 	description : String,
 	properties : Array<APIProperty>,
 	collection: Bool,
@@ -31,7 +35,7 @@ typedef APIMethodParameter =
 typedef APIReturn =
 {
 	name : String,
-	type : String,
+	type : SafeEitherType<String, Array<APIType>>,
 	collection: Bool,
 	description : String,
 	?properties : Array<APIProperty>
@@ -53,7 +57,7 @@ typedef APIProcess =
 	var renderer : Bool;
 }
 
-enum abstract APIType(String) from String to String
+enum abstract APIItemType(String) from String to String
 {
 	var Module = "Module";
 	var Class_ = "Class";
@@ -66,7 +70,7 @@ typedef APIItem =
 	description : String,
 	process : APIProcess,
 	version : String,
-	type : APIType,
+	type : APIItemType,
 	slug : String,
 	websiteUrl : String,
 	repoUrl : String,
@@ -81,11 +85,86 @@ typedef APIItem =
 	?events : Array<APIEvent>,
 };
 
+typedef APIType =
+{
+    collection: Bool,
+    type: SafeEitherType<String, Array<APIType>>
+};
+
 /**
 	Generates extern type definitions from electron-api.json
 **/
 class ElectronAPI
 {
+	public static function main()
+    {
+        var file = 'electron-api.json';
+        var out = '../library';
+        
+        if (!FileSystem.exists(file)) { Sys.println('API file not found `$file`.'); Sys.exit(1); }
+
+        stdlib.FileSystem.deleteDirectory(out + "/electron");
+        
+        var pack = ['electron'];
+        var electronApiJsonText = File.getContent(file);
+        var json = Json.parse(electronApiJsonText);
+        
+        var types = ElectronAPI.build(json, pack);
+        
+        var sourceCode = new StringMap<String>();
+        var printer = new haxe.macro.Printer();
+        
+        Sys.println('Generated [${types.length}] types into [$out]:');
+        for (type in types)
+        {
+            Sys.println("\t" + type.pack.concat([type.name]).join("."));
+            
+            var modulePath = type.pack.join('.');
+            var moduleName = type.name;
+            
+            var doc = '/**';
+            for (item in json)
+            {
+                if (item.name == type.name)
+                {
+                    if (item.description != null) doc += '\n\t' + item.description + '\n';
+                    if (item.websiteUrl != null) doc += '\n\tSee: <' + item.websiteUrl + '>';
+                    break;
+                }
+            }
+            doc += '\n**/';
+            
+            var code = printer.printTypeDefinition(type);
+            var lines = code.split('\n' );
+            code = lines.shift() + '\n';
+            code += '\n'+ doc +'\n';
+            code += lines.join('\n' );
+            
+            var classPath = modulePath + '.' + moduleName;
+            
+            if (moduleName.endsWith('Event' ))
+            {
+                code = code.split('\n' ).slice(1).join( '\n' );
+                sourceCode.set(modulePath, sourceCode.get(modulePath) + '\n' + code);
+            }
+            else
+            {
+                sourceCode.set(classPath, code);
+            }
+        }
+        
+        for (key in sourceCode.keys())
+        {
+            var parts = key.split('.');
+            var file = parts.pop();
+            var dir = out + '/' + parts.join('/');
+            if (!FileSystem.exists(dir)) FileSystem.createDirectory(dir);
+            File.saveContent(dir + '/' + file + '.hx', sourceCode.get(key));
+        }
+    }
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 	static var KWDS = ['class','switch'];
 
 	public static var pos(default, null) = #if macro null #else { min: 0, max: 0, file: '' } #end;
@@ -312,9 +391,10 @@ class ElectronAPI
 		);
 	}
 
-	static function convertType(type:String, ?properties:Array<Dynamic>, collection:Bool) : ComplexType
+	static function convertType(_type:SafeEitherType<String, Array<APIType>>, ?properties:Array<Dynamic>, collection:Bool) : ComplexType
 	{
-		if (type == null) return macro : Dynamic;
+		if (_type == null || _type.asA() == "" || Std.isOfType(_type, Array)) return macro : Dynamic;
+        var type = _type.asA().trim();
 
 		inline function isKnownType(type:String) : Bool
 		{
@@ -342,7 +422,7 @@ class ElectronAPI
 			return result;
 		}
 
-		var multiType = if (type.charAt(0) == '[' && type.charAt(type.length - 1) == ']')
+		var multiType = if (type.startsWith("[") && type.endsWith(']'))
 		{
 			var raw = type.substr(1, type.length - 2).split(',' );
 			var types = [];
@@ -357,7 +437,7 @@ class ElectronAPI
 				{
 					if (isKnownType(r))
 					{
-						types.push(convertType(r, false) );//TODO deterrmine 'collection'
+						types.push(convertType(r, false)); //TODO determinate 'collection'
 					}
 					else
 					{
@@ -455,6 +535,7 @@ class ElectronAPI
 		return if (collection) switch ctype
 		{
 			case TPath(p) : TPath( { name: 'Array<${p.name}>', pack: [] } );
+            case TAnonymous(fields): TAnonymous(fields);
 			default: throw 'failed to convert array type';
 		} else ctype;
 	}
@@ -543,4 +624,10 @@ class ElectronAPI
 	static function escapeTypeName(name:String) : String return name.charAt(0).toUpperCase() + name.substr(1);
 	
 	static function escapeName(name:String) : String return (KWDS.indexOf(name) != -1) ? name + '_' : name;
+}
+
+abstract SafeEitherType<A, B>(Dynamic) from A from B
+{
+    public inline function asA(): A return this;
+    public inline function asB(): B return this;
 }
