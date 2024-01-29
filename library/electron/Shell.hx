@@ -1,8 +1,10 @@
-package electron.remote;
+package electron;
+
+import electron.main.*;
 
 /**
 **/
-@:require(js, hxelectron) @:jsRequire("electron", "remote.shell") extern class Shell {
+@:require(js, hxelectron) @:jsRequire("electron", "shell") extern class Shell {
 	/**
 		Show the given file in a file manager. If possible, select the file.
 	**/

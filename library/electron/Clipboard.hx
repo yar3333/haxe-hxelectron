@@ -1,4 +1,6 @@
-package electron.main;
+package electron;
+
+import electron.main.*;
 
 /**
 **/

@@ -1,11 +1,13 @@
-package electron.remote;
+package electron;
+
+import electron.main.*;
 
 /**
 	
 
 	See: <https://electronjs.org/docs/api/utility-process>
 **/
-@:require(js, hxelectron) @:jsRequire("electron", "remote.UtilityProcess") extern class UtilityProcess extends js.node.events.EventEmitter<electron.main.UtilityProcess> {
+@:require(js, hxelectron) @:jsRequire("electron", "UtilityProcess") extern class UtilityProcess extends js.node.events.EventEmitter<electron.UtilityProcess> {
 	/**
 		A `Integer | undefined` representing the process identifier (PID) of the child process. If the child process fails to spawn due to errors, then the value is `undefined`. When the child process exits, then the value is `undefined` after the `exit` event is emitted.
 	**/

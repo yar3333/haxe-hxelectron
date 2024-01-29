@@ -1,8 +1,10 @@
-package electron.remote;
+package electron;
+
+import electron.main.*;
 
 /**
 **/
-@:require(js, hxelectron) @:jsRequire("electron", "remote.crashReporter") extern class CrashReporter {
+@:require(js, hxelectron) @:jsRequire("electron", "crashReporter") extern class CrashReporter {
 	/**
 		This method must be called before using any other `crashReporter` APIs. Once initialized this way, the crashpad handler collects crashes from all subsequently created processes. The crash reporter cannot be disabled once started.
 		

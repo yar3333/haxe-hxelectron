@@ -298,8 +298,16 @@ class ElectronAPI
 		var pack = pack.copy();
 		var meta = [];
 
-        if      (item.process != null && item.process.main)     pack.push('main' );
-        else if (item.process != null && item.process.renderer) pack.push('renderer' );
+        if (item.process != null)
+        {
+            switch ([ item.process.main, item.process.renderer ])
+            {
+                case [ true, false ]: pack.push('main');
+                case [ false, true ]: pack.push('renderer');
+                case [ true, true ]: // nothing to do
+                case [ false, false ]: // nothing to do
+            }
+        }
 
 		var fields = new Array<Field>();
 		var extraTypes = new Array<TypeDefinition>();
