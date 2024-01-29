@@ -1,5 +1,7 @@
 package electron;
 
+import electron.main.*;
+
 /**
 	
 
@@ -9,7 +11,7 @@ package electron;
 	/**
 		`rawData`.
 	**/
-	var type : 'rawData';
+	var type : String;
 	/**
 		Data to be uploaded.
 	**/

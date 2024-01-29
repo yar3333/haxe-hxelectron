@@ -1,4 +1,4 @@
-null
+package electron;
 
 /**
 	
@@ -13,6 +13,7 @@ null
 	/**
 		An array of modifiers of the event, can be `shift`, `control`, `ctrl`, `alt`, `meta`, `command`, `cmd`, `isKeypad`, `isAutoRepeat`, `leftButtonDown`, `middleButtonDown`, `rightButtonDown`, `capsLock`, `numLock`, `left`, `right`.
 	**/
+	@:optional
 	var modifiers : Array<String>;
 }
 
@@ -49,7 +50,7 @@ null
 	/**
 		A function that will send an IPC message to the renderer frame that sent the original message that you are currently handling.  You should use this method to "reply" to the sent message in order to guarantee the reply will go to the correct process and frame.
 	**/
-	var reply : haxe.Constraints.Function;
+	var reply : (String, Array<Any>) -> Dynamic;
 }
 
 /**
@@ -101,22 +102,27 @@ null
 	/**
 		whether the Control key was used in an accelerator to trigger the Event
 	**/
+	@:optional
 	var ctrlKey : Bool;
 	/**
 		whether a meta key was used in an accelerator to trigger the Event
 	**/
+	@:optional
 	var metaKey : Bool;
 	/**
 		whether a Shift key was used in an accelerator to trigger the Event
 	**/
+	@:optional
 	var shiftKey : Bool;
 	/**
 		whether an Alt key was used in an accelerator to trigger the Event
 	**/
+	@:optional
 	var altKey : Bool;
 	/**
 		whether an accelerator was used to trigger the event as opposed to another user gesture like mouse click
 	**/
+	@:optional
 	var triggeredByAccelerator : Bool;
 }
 
@@ -151,11 +157,17 @@ null
 	/**
 		The button pressed, can be `left`, `middle`, `right`.
 	**/
+	@:optional
 	var button : String;
+	@:optional
 	var globalX : Int;
+	@:optional
 	var globalY : Int;
+	@:optional
 	var movementX : Int;
+	@:optional
 	var movementY : Int;
+	@:optional
 	var clickCount : Int;
 }
 
@@ -169,12 +181,20 @@ null
 		The type of the event, can be `mouseWheel`.
 	**/
 	var type : String;
+	@:optional
 	var deltaX : Int;
+	@:optional
 	var deltaY : Int;
+	@:optional
 	var wheelTicksX : Int;
+	@:optional
 	var wheelTicksY : Int;
+	@:optional
 	var accelerationRatioX : Int;
+	@:optional
 	var accelerationRatioY : Int;
+	@:optional
 	var hasPreciseScrollingDeltas : Bool;
+	@:optional
 	var canScroll : Bool;
 }

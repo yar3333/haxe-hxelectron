@@ -1,5 +1,7 @@
 package electron;
 
+import electron.main.*;
+
 /**
 	Possible values:
 

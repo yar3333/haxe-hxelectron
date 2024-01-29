@@ -36,9 +36,9 @@ package electron.remote;
 	/**
 		Converts a screen physical rect to a screen DIP rect. The DPI scale is performed relative to the display nearest to `window`. If `window` is null, scaling will be performed to the display nearest to `rect`.
 	**/
-	static function screenToDipRect(window:Dynamic, rect:Rectangle):Rectangle;
+	static function screenToDipRect(window:Null<BrowserWindow>, rect:Rectangle):Rectangle;
 	/**
 		Converts a screen DIP rect to a screen physical rect. The DPI scale is performed relative to the display nearest to `window`. If `window` is null, scaling will be performed to the display nearest to `rect`.
 	**/
-	static function dipToScreenRect(window:Dynamic, rect:Rectangle):Rectangle;
+	static function dipToScreenRect(window:Null<BrowserWindow>, rect:Rectangle):Rectangle;
 }

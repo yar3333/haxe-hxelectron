@@ -40,8 +40,7 @@ package electron.renderer;
 		
 		An example of using node-spellchecker as provider:
 	**/
-	static function setSpellCheckProvider(language:String, provider:{ @:optional
-	var spellCheck : haxe.Constraints.Function; }):Void;
+	static function setSpellCheckProvider(language:String, provider:{ var spellCheck : (Array<String>, Array<String> -> Dynamic) -> Dynamic; }):Void;
 	/**
 		A key for the inserted CSS that can later be used to remove the CSS via `webFrame.removeInsertedCSS(key)`.
 		
@@ -67,7 +66,7 @@ package electron.renderer;
 		
 		In the browser window some HTML APIs like `requestFullScreen` can only be invoked by a gesture from the user. Setting `userGesture` to `true` will remove this limitation.
 	**/
-	static function executeJavaScript(code:String, ?userGesture:Bool, ?callback:haxe.Constraints.Function):js.lib.Promise<Dynamic>;
+	static function executeJavaScript(code:String, ?userGesture:Bool, ?callback:(Dynamic, Error) -> Dynamic):js.lib.Promise<Dynamic>;
 	/**
 		A promise that resolves with the result of the executed code or is rejected if execution could not start.
 		
@@ -75,7 +74,7 @@ package electron.renderer;
 		
 		Note that when the execution of script fails, the returned promise will not reject and the `result` would be `undefined`. This is because Chromium does not dispatch errors of isolated worlds to foreign worlds.
 	**/
-	static function executeJavaScriptInIsolatedWorld(worldId:Int, scripts:Array<WebSource>, ?userGesture:Bool, ?callback:haxe.Constraints.Function):js.lib.Promise<Dynamic>;
+	static function executeJavaScriptInIsolatedWorld(worldId:Int, scripts:Array<WebSource>, ?userGesture:Bool, ?callback:(Dynamic, Error) -> Dynamic):js.lib.Promise<Dynamic>;
 	/**
 		Set the security origin, content security policy and name of the isolated world. Note: If the `csp` is specified, then the `securityOrigin` also has to be specified.
 	**/
@@ -104,13 +103,7 @@ package electron.renderer;
 		
 		This will generate:
 	**/
-	static function getResourceUsage():{ @:optional
-	var images : MemoryUsageDetails; @:optional
-	var scripts : MemoryUsageDetails; @:optional
-	var cssStyleSheets : MemoryUsageDetails; @:optional
-	var xslStyleSheets : MemoryUsageDetails; @:optional
-	var fonts : MemoryUsageDetails; @:optional
-	var other : MemoryUsageDetails; };
+	static function getResourceUsage():{ var images : MemoryUsageDetails; var scripts : MemoryUsageDetails; var cssStyleSheets : MemoryUsageDetails; var xslStyleSheets : MemoryUsageDetails; var fonts : MemoryUsageDetails; var other : MemoryUsageDetails; };
 	/**
 		Attempts to free memory that is no longer being used (like images from a previous navigation).
 		

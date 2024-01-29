@@ -1,5 +1,7 @@
 package electron;
 
+import electron.main.*;
+
 /**
 	**Note:** If a `JumpListCategory` object has neither the `type` nor the `name` property set then its `type` is assumed to be `tasks`. If the `name` property is set but the `type` property is omitted then the `type` is assumed to be `custom`.
 
@@ -11,13 +13,16 @@ package electron;
 	/**
 		One of the following:
 	**/
+	@:optional
 	var type : String;
 	/**
 		Must be set if `type` is `custom`, otherwise it should be omitted.
 	**/
+	@:optional
 	var name : String;
 	/**
 		Array of `JumpListItem` objects if `type` is `tasks` or `custom`, otherwise it should be omitted.
 	**/
+	@:optional
 	var items : Array<JumpListItem>;
 }

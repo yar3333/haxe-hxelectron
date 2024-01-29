@@ -6,7 +6,7 @@ package electron.remote;
 	/**
 		Creates a `ClientRequest` instance using the provided `options` which are directly forwarded to the `ClientRequest` constructor. The `net.request` method would be used to issue both secure and insecure HTTP requests according to the specified protocol scheme in the `options` object.
 	**/
-	static function request(options:Dynamic):ClientRequest;
+	static function request(options:haxe.extern.EitherType<ClientRequestConstructorOptions, String>):ClientRequest;
 	/**
 		see Response.
 		
@@ -28,7 +28,7 @@ package electron.remote;
 		
 		Note: in the utility process custom protocols are not supported.
 	**/
-	static function fetch(input:Dynamic, ?init:RequestInit & { bypassCustomProtocolHandlers?: boolean }):js.lib.Promise<Dynamic>;
+	static function fetch(input:haxe.extern.EitherType<String, GlobalRequest>, ?init:Dynamic):js.lib.Promise<GlobalResponse>;
 	/**
 		Whether there is currently internet connection.
 		
@@ -56,5 +56,5 @@ package electron.remote;
 		Controls the resolver's Secure DNS behavior for this request. One of the following values:
 	**/
 	@:optional
-	var secureDnsPolicy : String; }):js.lib.Promise<Dynamic>;
+	var secureDnsPolicy : String; }):js.lib.Promise<ResolvedHost>;
 }

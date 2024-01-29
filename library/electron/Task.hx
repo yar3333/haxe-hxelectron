@@ -1,5 +1,7 @@
 package electron;
 
+import electron.main.*;
+
 /**
 	
 
@@ -33,5 +35,6 @@ package electron;
 	/**
 		The working directory. Default is empty.
 	**/
+	@:optional
 	var workingDirectory : String;
 }

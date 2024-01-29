@@ -36,19 +36,19 @@ package electron.main;
 	/**
 		A `WebFrameMain | null` representing top frame in the frame hierarchy to which `frame` belongs.
 	**/
-	var top : Dynamic;
+	var top : Null<WebFrameMain>;
 	/**
 		A `WebFrameMain | null` representing parent frame of `frame`, the property would be `null` if `frame` is the top frame in the frame hierarchy.
 	**/
-	var parent : Dynamic;
+	var parent : Null<WebFrameMain>;
 	/**
 		A `WebFrameMain[]` collection containing the direct descendents of `frame`.
 	**/
-	var frames : WebFrameMain;
+	var frames : Array<WebFrameMain>;
 	/**
 		A `WebFrameMain[]` collection containing every frame in the subtree of `frame`, including itself. This can be useful when traversing through all frames.
 	**/
-	var framesInSubtree : WebFrameMain;
+	var framesInSubtree : Array<WebFrameMain>;
 	/**
 		An `Integer` representing the id of the frame's internal FrameTreeNode instance. This id is browser-global and uniquely identifies a frame that hosts content. The identifier is fixed at the creation of the frame and stays constant for the lifetime of the frame. When the frame is removed, the id is not used again.
 	**/
@@ -100,7 +100,7 @@ package electron.main;
 		
 		For example:
 	**/
-	function postMessage(channel:String, message:Any, ?transfer:Array<MessagePortMain>):Void;
+	function postMessage(channel:String, message:Dynamic, ?transfer:Array<MessagePortMain>):Void;
 }
 
 /**

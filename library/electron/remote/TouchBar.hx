@@ -15,10 +15,10 @@ Process: Main
 	/**
 		A `TouchBarItem` that will replace the "esc" button on the touch bar when set. Setting to `null` restores the default "esc" button. Changing this value immediately updates the escape item in the touch bar.
 	**/
-	var escapeItem : TouchBarItem;
+	var escapeItem : Dynamic;
 	function new(options:{ @:optional
-	var items : Array<Dynamic>; @:optional
-	var escapeItem : Dynamic; }):Void;
+	var items : haxe.extern.EitherType<TouchBarButton, haxe.extern.EitherType<TouchBarColorPicker, haxe.extern.EitherType<TouchBarGroup, haxe.extern.EitherType<TouchBarLabel, haxe.extern.EitherType<TouchBarPopover, haxe.extern.EitherType<TouchBarScrubber, haxe.extern.EitherType<TouchBarSegmentedControl, haxe.extern.EitherType<TouchBarSlider, TouchBarSpacer>>>>>>>>; @:optional
+	var escapeItem : Null<haxe.extern.EitherType<TouchBarButton, haxe.extern.EitherType<TouchBarColorPicker, haxe.extern.EitherType<TouchBarGroup, haxe.extern.EitherType<TouchBarLabel, haxe.extern.EitherType<TouchBarPopover, haxe.extern.EitherType<TouchBarScrubber, haxe.extern.EitherType<TouchBarSegmentedControl, haxe.extern.EitherType<TouchBarSlider, TouchBarSpacer>>>>>>>>>; }):Void;
 }
 
 /**

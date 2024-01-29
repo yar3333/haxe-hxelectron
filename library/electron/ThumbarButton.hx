@@ -1,5 +1,7 @@
 package electron;
 
+import electron.main.*;
+
 /**
 	The `flags` is an array that can include following `string`s:
 
@@ -17,13 +19,15 @@ package electron;
 		The icon showing in thumbnail toolbar.
 	**/
 	var icon : NativeImage;
-	var click : haxe.Constraints.Function;
+	var click : () -> Dynamic;
 	/**
 		The text of the button's tooltip.
 	**/
+	@:optional
 	var tooltip : String;
 	/**
 		Control specific states and behaviors of the button. By default, it is `['enabled']`.
 	**/
+	@:optional
 	var flags : Array<String>;
 }

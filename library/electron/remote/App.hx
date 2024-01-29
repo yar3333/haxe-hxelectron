@@ -36,7 +36,7 @@ package electron.remote;
 	/**
 		fulfilled when Electron is initialized. May be used as a convenient alternative to checking `app.isReady()` and subscribing to the `ready` event if the app is not ready yet.
 	**/
-	static function whenReady():js.lib.Promise<Dynamic>;
+	static function whenReady():js.lib.Promise<Void>;
 	/**
 		On Linux, focuses on the first visible window. On macOS, makes the application the active app. On Windows, focuses on the application's first window.
 		
@@ -45,7 +45,6 @@ package electron.remote;
 	static function focus(?options:{ /**
 		Make the receiver the active app even if another app is currently active.
 	**/
-	@:optional
 	var steal : Bool; }):Void;
 	/**
 		Hides all application windows without minimizing them.
@@ -87,8 +86,7 @@ package electron.remote;
 		
 		On _Linux_ and _macOS_, icons depend on the application associated with file mime type.
 	**/
-	static function getFileIcon(path:String, ?options:{ @:optional
-	var size : String; }):js.lib.Promise<Dynamic>;
+	static function getFileIcon(path:String, ?options:{ var size : String; }):js.lib.Promise<NativeImage>;
 	/**
 		Overrides the `path` to a special directory or file associated with `name`. If the path specifies a directory that does not exist, an `Error` is thrown. In that case, the directory should be created with `fs.mkdirSync` or similar.
 		
@@ -215,7 +213,16 @@ package electron.remote;
 		
 		This method returns a promise that contains the application name, icon and path of the default handler for the protocol (aka URI scheme) of a URL.
 	**/
-	static function getApplicationInfoForProtocol(url:String):js.lib.Promise<Dynamic>;
+	static function getApplicationInfoForProtocol(url:String):js.lib.Promise<{ /**
+		the display icon of the app handling the protocol.
+	**/
+	var icon : NativeImage; /**
+		installation path of the app handling the protocol.
+	**/
+	var path : String; /**
+		display name of the app handling the protocol.
+	**/
+	var name : String; }>;
 	/**
 		Adds `tasks` to the Tasks category of the Jump List on Windows.
 		
@@ -233,11 +240,9 @@ package electron.remote;
 	static function getJumpListSettings():{ /**
 		The minimum number of items that will be shown in the Jump List (for a more detailed description of this value see the MSDN docs).
 	**/
-	@:optional
 	var minItems : Int; /**
 		Array of `JumpListItem` objects that correspond to items that the user has explicitly removed from custom categories in the Jump List. These items must not be re-added to the Jump List in the **next** call to `app.setJumpList()`, Windows will not display any custom category that contains any of the removed items.
 	**/
-	@:optional
 	var removedItems : Array<JumpListItem>; };
 	/**
 		Sets or removes a custom Jump List for the application, and returns one of the following strings:
@@ -258,7 +263,7 @@ package electron.remote;
 		
 		Here's a very simple example of creating a custom Jump List:
 	**/
-	static function setJumpList(categories:Dynamic):String;
+	static function setJumpList(categories:Null<Array<JumpListCategory>>):String;
 	/**
 		The return value of this method indicates whether or not this instance of your application successfully obtained the lock.  If it failed to obtain the lock, you can assume that another instance of your application is already running with the lock and exit immediately.
 		
@@ -268,7 +273,7 @@ package electron.remote;
 		
 		An example of activating the window of primary instance when a second instance starts:
 	**/
-	static function requestSingleInstanceLock(?additionalData:Record):Bool;
+	static function requestSingleInstanceLock(?additionalData:Dynamic):Bool;
 	/**
 		This method returns whether or not this instance of your app is currently holding the single instance lock.  You can request the lock with `app.requestSingleInstanceLock()` and release with `app.releaseSingleInstanceLock()`
 	**/
@@ -280,7 +285,7 @@ package electron.remote;
 	/**
 		Creates an `NSUserActivity` and sets it as the current activity. The activity is eligible for Handoff to another device afterward.
 	**/
-	static function setUserActivity(type:String, userInfo:Any, ?webpageURL:String):Void;
+	static function setUserActivity(type:String, userInfo:Dynamic, ?webpageURL:String):Void;
 	/**
 		The type of the currently running activity.
 	**/
@@ -296,7 +301,7 @@ package electron.remote;
 	/**
 		Updates the current activity if its type matches `type`, merging the entries from `userInfo` into its current `userInfo` dictionary.
 	**/
-	static function updateCurrentActivity(type:String, userInfo:Any):Void;
+	static function updateCurrentActivity(type:String, userInfo:Dynamic):Void;
 	/**
 		Changes the Application User Model ID to `id`.
 	**/
@@ -317,12 +322,10 @@ package electron.remote;
 	static function importCertificate(options:{ /**
 		Path for the pkcs12 file.
 	**/
-	@:optional
 	var certificate : String; /**
 		Passphrase for the certificate.
 	**/
-	@:optional
-	var password : String; }, callback:haxe.Constraints.Function):Void;
+	var password : String; }, callback:Int -> Dynamic):Void;
 	/**
 		Configures host resolution (DNS and DNS-over-HTTPS). By default, the following resolvers will be used, in order:
 		
@@ -431,48 +434,36 @@ package electron.remote;
 	var args : Array<String>; }):{ /**
 		`true` if the app is set to open at login.
 	**/
-	@:optional
 	var openAtLogin : Bool; /**
 		`true` if the app is set to open as hidden at login. This setting is not available on MAS builds.
 	**/
-	@:optional
 	var openAsHidden : Bool; /**
 		`true` if the app was opened at login automatically. This setting is not available on MAS builds.
 	**/
-	@:optional
 	var wasOpenedAtLogin : Bool; /**
 		`true` if the app was opened as a hidden login item. This indicates that the app should not open any windows at startup. This setting is not available on MAS builds.
 	**/
-	@:optional
 	var wasOpenedAsHidden : Bool; /**
 		`true` if the app was opened as a login item that should restore the state from the previous session. This indicates that the app should restore the windows that were open the last time the app was closed. This setting is not available on MAS builds.
 	**/
-	@:optional
 	var restoreState : Bool; /**
 		`true` if app is set to open at login and its run key is not deactivated. This differs from `openAtLogin` as it ignores the `args` option, this property will be true if the given executable would be launched at login with **any** arguments.
 	**/
-	@:optional
-	var executableWillLaunchAtLogin : Bool; @:optional
-	var launchItems : { /**
+	var executableWillLaunchAtLogin : Bool; var launchItems : { /**
 		name value of a registry entry.
 	**/
-	@:optional
 	var name : String; /**
 		The executable to an app that corresponds to a registry entry.
 	**/
-	@:optional
 	var path : String; /**
 		the command-line arguments to pass to the executable.
 	**/
-	@:optional
 	var args : Array<String>; /**
 		one of `user` or `machine`. Indicates whether the registry entry is under `HKEY_CURRENT USER` or `HKEY_LOCAL_MACHINE`.
 	**/
-	@:optional
 	var scope : String; /**
 		`true` if the app registry key is startup approved and therefore shows as `enabled` in Task Manager and Windows settings.
 	**/
-	@:optional
 	var enabled : Bool; }; };
 	/**
 		To work with Electron's `autoUpdater` on Windows, which uses Squirrel, you'll want to set the launch path to Update.exe, and pass arguments that specify your application name. For example:
@@ -569,7 +560,7 @@ package electron.remote;
 		
 		Start accessing a security scoped resource. With this method Electron applications that are packaged for the Mac App Store may reach outside their sandbox to access files chosen by the user. See Apple's documentation for a description of how this system works.
 	**/
-	static function startAccessingSecurityScopedResource(bookmarkData:String):haxe.Constraints.Function;
+	static function startAccessingSecurityScopedResource(bookmarkData:String):() -> Dynamic;
 	/**
 		Enables full sandbox mode on the app. This means that all renderers will be launched sandboxed, regardless of the value of the `sandbox` flag in `WebPreferences`.
 		
@@ -597,7 +588,7 @@ package electron.remote;
 		A handler for potential conflict in move failure.
 	**/
 	@:optional
-	var conflictHandler : haxe.Constraints.Function; }):Bool;
+	var conflictHandler : String -> Bool; }):Bool;
 	/**
 		whether `Secure Keyboard Entry` is enabled.
 		

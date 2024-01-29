@@ -1,5 +1,7 @@
 package electron;
 
+import electron.main.*;
+
 /**
 	
 
@@ -17,10 +19,12 @@ package electron;
 	/**
 		The non-localized name of the process.
 	**/
+	@:optional
 	var serviceName : String;
 	/**
 		The name of the process. Examples for utility: `Audio Service`, `Content Decryption Module Service`, `Network Service`, `Video Capture`, etc.
 	**/
+	@:optional
 	var name : String;
 	/**
 		CPU usage of the process.
@@ -37,9 +41,11 @@ package electron;
 	/**
 		Whether the process is sandboxed on OS level.
 	**/
+	@:optional
 	var sandboxed : Bool;
 	/**
 		One of the following values:
 	**/
+	@:optional
 	var integrityLevel : String;
 }

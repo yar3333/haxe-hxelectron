@@ -1,11 +1,11 @@
-package electron;
+package electron.remote;
 
 /**
 	
 
 	See: <https://electronjs.org/docs/api/native-image>
 **/
-@:require(js, hxelectron) @:jsRequire("electron", "NativeImage") extern class NativeImage extends js.node.events.EventEmitter<electron.NativeImage> {
+@:require(js, hxelectron) @:jsRequire("electron", "remote.NativeImage") extern class NativeImage extends js.node.events.EventEmitter<electron.main.NativeImage> {
 	/**
 		A `boolean` property that determines whether the image is considered a template image.
 		

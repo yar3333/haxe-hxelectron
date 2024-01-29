@@ -23,7 +23,7 @@ package electron.main;
 		
 		Send given command to the debugging target.
 	**/
-	function sendCommand(method:String, ?commandParams:Any, ?sessionId:String):js.lib.Promise<Dynamic>;
+	function sendCommand(method:String, ?commandParams:Dynamic, ?sessionId:String):js.lib.Promise<Dynamic>;
 }
 
 /**

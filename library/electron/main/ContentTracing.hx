@@ -10,7 +10,7 @@ package electron.main;
 		
 		> **NOTE:** Electron adds a non-default tracing category called `"electron"`. This category can be used to capture Electron-specific tracing events.
 	**/
-	static function getCategories():js.lib.Promise<Dynamic>;
+	static function getCategories():js.lib.Promise<Array<String>>;
 	/**
 		resolved once all child processes have acknowledged the `startRecording` request.
 		
@@ -20,7 +20,7 @@ package electron.main;
 		
 		If a recording is already running, the promise will be immediately resolved, as only one trace operation can be in progress at a time.
 	**/
-	static function startRecording(options:Dynamic):js.lib.Promise<Dynamic>;
+	static function startRecording(options:haxe.extern.EitherType<TraceConfig, TraceCategoriesAndOptions>):js.lib.Promise<Void>;
 	/**
 		resolves with a path to a file that contains the traced data once all child processes have acknowledged the `stopRecording` request
 		
@@ -30,7 +30,7 @@ package electron.main;
 		
 		Trace data will be written into `resultFilePath`. If `resultFilePath` is empty or not provided, trace data will be written to a temporary file, and the path will be returned in the promise.
 	**/
-	static function stopRecording(?resultFilePath:String):js.lib.Promise<Dynamic>;
+	static function stopRecording(?resultFilePath:String):js.lib.Promise<String>;
 	/**
 		Resolves with an object containing the `value` and `percentage` of trace buffer maximum usage
 		
@@ -39,5 +39,5 @@ package electron.main;
 		
 		Get the maximum usage across processes of trace buffer as a percentage of the full state.
 	**/
-	static function getTraceBufferUsage():js.lib.Promise<Dynamic>;
+	static function getTraceBufferUsage():js.lib.Promise<{ var value : Float; var percentage : Float; }>;
 }

@@ -1,5 +1,7 @@
 package electron;
 
+import electron.main.*;
+
 /**
 	This type is a helper alias, no object will never exist of this type.
 
@@ -13,5 +15,5 @@ package electron;
 	var double : Float;
 	var url : String;
 	var array : Array;
-	var dictionary : Record;
+	var dictionary : Dynamic;
 }

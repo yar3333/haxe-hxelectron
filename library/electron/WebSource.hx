@@ -1,5 +1,7 @@
 package electron;
 
+import electron.main.*;
+
 /**
 	
 
@@ -7,5 +9,6 @@ package electron;
 **/
 @:require(js, hxelectron) typedef WebSource = {
 	var code : String;
+	@:optional
 	var url : String;
 }

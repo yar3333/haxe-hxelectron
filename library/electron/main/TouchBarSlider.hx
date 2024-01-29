@@ -44,7 +44,7 @@ Process: Main<br /> _This class is not exported from the `'electron'` module. It
 		Function to call when the slider is changed.
 	**/
 	@:optional
-	var change : haxe.Constraints.Function; }):Void;
+	var change : Float -> Dynamic; }):Void;
 }
 
 /**

@@ -1,5 +1,7 @@
 package electron;
 
+import electron.main.*;
+
 /**
 	
 
@@ -25,9 +27,11 @@ package electron;
 	/**
 		The USB device serial number.
 	**/
+	@:optional
 	var serialNumber : String;
 	/**
 		Unique identifier for the HID interface.  A device may have multiple HID interfaces.
 	**/
+	@:optional
 	var guid : String;
 }

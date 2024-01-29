@@ -79,7 +79,7 @@ Returns `boolean` - Whether or not desktop notifications are supported on the cu
 	/**
 		A `NotificationAction[]` property representing the actions of the notification.
 	**/
-	var actions : NotificationAction;
+	var actions : Array<NotificationAction>;
 	/**
 		A `string` property representing the custom Toast XML of the notification.
 	**/
@@ -104,7 +104,7 @@ Returns `boolean` - Whether or not desktop notifications are supported on the cu
 		An icon to use in the notification.
 	**/
 	@:optional
-	var icon : Dynamic; /**
+	var icon : haxe.extern.EitherType<String, NativeImage>; /**
 		Whether or not to add an inline reply option to the notification.
 	**/
 	@:optional

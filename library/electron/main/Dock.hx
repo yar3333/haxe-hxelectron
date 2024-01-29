@@ -39,7 +39,7 @@ package electron.main;
 	/**
 		Resolves when the dock icon is shown.
 	**/
-	function show():js.lib.Promise<Dynamic>;
+	function show():js.lib.Promise<Void>;
 	/**
 		Whether the dock icon is visible.
 	**/
@@ -51,11 +51,11 @@ package electron.main;
 	/**
 		The application's dock menu.
 	**/
-	function getMenu():Dynamic;
+	function getMenu():Null<Menu>;
 	/**
 		Sets the `image` associated with this dock icon.
 	**/
-	function setIcon(image:Dynamic):Void;
+	function setIcon(image:haxe.extern.EitherType<NativeImage, String>):Void;
 }
 
 /**

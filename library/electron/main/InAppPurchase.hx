@@ -8,13 +8,21 @@ package electron.main;
 		
 		You should listen for the `transactions-updated` event as soon as possible and certainly before you call `purchaseProduct`.
 	**/
-	static function purchaseProduct(productID:String, ?opts:Dynamic):js.lib.Promise<Dynamic>;
+	static function purchaseProduct(productID:String, ?opts:haxe.extern.EitherType<Int, { /**
+		The number of items the user wants to purchase.
+	**/
+	@:optional
+	var quantity : Int; /**
+		The string that associates the transaction with a user account on your service (applicationUsername).
+	**/
+	@:optional
+	var username : String; }>):js.lib.Promise<Bool>;
 	/**
 		Resolves with an array of `Product` objects.
 		
 		Retrieves the product descriptions.
 	**/
-	static function getProducts(productIDs:Array<String>):js.lib.Promise<Dynamic>;
+	static function getProducts(productIDs:Array<String>):js.lib.Promise<Array<Product>>;
 	/**
 		whether a user can make a payment.
 	**/

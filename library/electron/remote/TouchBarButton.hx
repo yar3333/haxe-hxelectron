@@ -48,7 +48,7 @@ Process: Main<br /> _This class is not exported from the `'electron'` module. It
 		Button icon.
 	**/
 	@:optional
-	var icon : Dynamic; /**
+	var icon : haxe.extern.EitherType<NativeImage, String>; /**
 		Can be `left`, `right` or `overlay`. Defaults to `overlay`.
 	**/
 	@:optional
@@ -56,7 +56,7 @@ Process: Main<br /> _This class is not exported from the `'electron'` module. It
 		Function to call when the button is clicked.
 	**/
 	@:optional
-	var click : haxe.Constraints.Function; /**
+	var click : () -> Dynamic; /**
 		Whether the button is in an enabled state.  Default is `true`.
 	**/
 	@:optional

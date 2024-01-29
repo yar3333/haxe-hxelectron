@@ -25,10 +25,11 @@ See `Menu` for examples.
 		* `focusedWindow` BrowserWindow
 		* `focusedWebContents` WebContents
 	**/
-	var click : haxe.Constraints.Function;
+	var click : (KeyboardEvent, BrowserWindow, WebContents) -> Dynamic;
 	/**
 		A `Menu` (optional) containing the menu item's submenu, if present.
 	**/
+	@:optional
 	var submenu : Menu;
 	/**
 		A `string` indicating the type of the item. Can be `normal`, `separator`, `submenu`, `checkbox` or `radio`.
@@ -37,21 +38,24 @@ See `Menu` for examples.
 	/**
 		A `string` (optional) indicating the item's role, if set. Can be `undo`, `redo`, `cut`, `copy`, `paste`, `pasteAndMatchStyle`, `delete`, `selectAll`, `reload`, `forceReload`, `toggleDevTools`, `resetZoom`, `zoomIn`, `zoomOut`, `toggleSpellChecker`, `togglefullscreen`, `window`, `minimize`, `close`, `help`, `about`, `services`, `hide`, `hideOthers`, `unhide`, `quit`, `startSpeaking`, `stopSpeaking`, `zoom`, `front`, `appMenu`, `fileMenu`, `editMenu`, `viewMenu`, `shareMenu`, `recentDocuments`, `toggleTabBar`, `selectNextTab`, `selectPreviousTab`, `showAllTabs`, `mergeAllWindows`, `clearRecentDocuments`, `moveTabToNewWindow` or `windowMenu`
 	**/
+	@:optional
 	var role : String;
 	/**
 		An `Accelerator` (optional) indicating the item's accelerator, if set.
 	**/
+	@:optional
 	var accelerator : Accelerator;
 	/**
 		An `Accelerator | null` indicating the item's user-assigned accelerator for the menu item.
 		
 		**Note:** This property is only initialized after the `MenuItem` has been added to a `Menu`. Either via `Menu.buildFromTemplate` or via `Menu.append()/insert()`.  Accessing before initialization will just return `null`.
 	**/
-	var userAccelerator : Dynamic;
+	var userAccelerator : Null<Accelerator>;
 	/**
 		A `NativeImage | string` (optional) indicating the item's icon, if set.
 	**/
-	var icon : Dynamic;
+	@:optional
+	var icon : haxe.extern.EitherType<NativeImage, String>;
 	/**
 		A `string` indicating the item's sublabel.
 	**/
@@ -102,7 +106,7 @@ See `Menu` for examples.
 		Will be called with `click(menuItem, browserWindow, event)` when the menu item is clicked.
 	**/
 	@:optional
-	var click : haxe.Constraints.Function; /**
+	var click : (MenuItem, Null<BrowserWindow>, KeyboardEvent) -> Dynamic; /**
 		Can be `undo`, `redo`, `cut`, `copy`, `paste`, `pasteAndMatchStyle`, `delete`, `selectAll`, `reload`, `forceReload`, `toggleDevTools`, `resetZoom`, `zoomIn`, `zoomOut`, `toggleSpellChecker`, `togglefullscreen`, `window`, `minimize`, `close`, `help`, `about`, `services`, `hide`, `hideOthers`, `unhide`, `quit`, `showSubstitutions`, `toggleSmartQuotes`, `toggleSmartDashes`, `toggleTextReplacement`, `startSpeaking`, `stopSpeaking`, `zoom`, `front`, `appMenu`, `fileMenu`, `editMenu`, `viewMenu`, `shareMenu`, `recentDocuments`, `toggleTabBar`, `selectNextTab`, `selectPreviousTab`, `showAllTabs`, `mergeAllWindows`, `clearRecentDocuments`, `moveTabToNewWindow` or `windowMenu` - Define the action of the menu item, when specified the `click` property will be ignored. See roles.
 	**/
 	@:optional
@@ -118,7 +122,7 @@ See `Menu` for examples.
 	@:optional
 	var toolTip : String; @:optional
 	var accelerator : Accelerator; @:optional
-	var icon : Dynamic; /**
+	var icon : haxe.extern.EitherType<NativeImage, String>; /**
 		If false, the menu item will be greyed out and unclickable.
 	**/
 	@:optional
@@ -146,7 +150,7 @@ See `Menu` for examples.
 		Should be specified for `submenu` type menu items. If `submenu` is specified, the `type: 'submenu'` can be omitted. If the value is not a `Menu` then it will be automatically converted to one using `Menu.buildFromTemplate`.
 	**/
 	@:optional
-	var submenu : Dynamic; /**
+	var submenu : haxe.extern.EitherType<Array<Dynamic>, Menu>; /**
 		Unique within a single menu. If defined then it can be used as a reference to this item by the position attribute.
 	**/
 	@:optional

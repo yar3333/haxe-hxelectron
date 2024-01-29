@@ -1,5 +1,7 @@
 package electron;
 
+import electron.main.*;
+
 /**
 	
 
@@ -10,6 +12,7 @@ package electron;
 		Custom schemes to be registered with options.
 	**/
 	var scheme : String;
+	@:optional
 	var privileges : { /**
 		Default false.
 	**/

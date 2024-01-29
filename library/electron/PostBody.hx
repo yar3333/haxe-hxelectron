@@ -1,5 +1,7 @@
 package electron;
 
+import electron.main.*;
+
 /**
 	
 
@@ -9,7 +11,7 @@ package electron;
 	/**
 		The post data to be sent to the new window.
 	**/
-	var data : Dynamic;
+	var data : haxe.extern.EitherType<UploadRawData, UploadFile>;
 	/**
 		The `content-type` header used for the data. One of `application/x-www-form-urlencoded` or `multipart/form-data`. Corresponds to the `enctype` attribute of the submitted HTML form.
 	**/
@@ -17,5 +19,6 @@ package electron;
 	/**
 		The boundary used to separate multiple parts of the message. Only valid when `contentType` is `multipart/form-data`.
 	**/
+	@:optional
 	var boundary : String;
 }

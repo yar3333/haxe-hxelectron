@@ -10,15 +10,15 @@ package electron.remote;
 	/**
 		Posts `event` as native notifications of macOS. The `userInfo` is an Object that contains the user information dictionary sent along with the notification.
 	**/
-	static function postNotification(event:String, userInfo:Record, ?deliverImmediately:Bool):Void;
+	static function postNotification(event:String, userInfo:Dynamic, ?deliverImmediately:Bool):Void;
 	/**
 		Posts `event` as native notifications of macOS. The `userInfo` is an Object that contains the user information dictionary sent along with the notification.
 	**/
-	static function postLocalNotification(event:String, userInfo:Record):Void;
+	static function postLocalNotification(event:String, userInfo:Dynamic):Void;
 	/**
 		Posts `event` as native notifications of macOS. The `userInfo` is an Object that contains the user information dictionary sent along with the notification.
 	**/
-	static function postWorkspaceNotification(event:String, userInfo:Record):Void;
+	static function postWorkspaceNotification(event:String, userInfo:Dynamic):Void;
 	/**
 		The ID of this subscription
 		
@@ -35,7 +35,7 @@ package electron.remote;
 		
 		If `event` is null, the `NSDistributedNotificationCenter` doesn’t use it as criteria for delivery to the observer. See docs  for more information.
 	**/
-	static function subscribeNotification(event:Dynamic, callback:haxe.Constraints.Function):Float;
+	static function subscribeNotification(event:Null<String>, callback:(String, Dynamic, String) -> Dynamic):Float;
 	/**
 		The ID of this subscription
 		
@@ -43,7 +43,7 @@ package electron.remote;
 		
 		If `event` is null, the `NSNotificationCenter` doesn’t use it as criteria for delivery to the observer. See docs for more information.
 	**/
-	static function subscribeLocalNotification(event:Dynamic, callback:haxe.Constraints.Function):Float;
+	static function subscribeLocalNotification(event:Null<String>, callback:(String, Dynamic, String) -> Dynamic):Float;
 	/**
 		The ID of this subscription
 		
@@ -51,7 +51,7 @@ package electron.remote;
 		
 		If `event` is null, the `NSWorkspaceNotificationCenter` doesn’t use it as criteria for delivery to the observer. See docs for more information.
 	**/
-	static function subscribeWorkspaceNotification(event:Dynamic, callback:haxe.Constraints.Function):Float;
+	static function subscribeWorkspaceNotification(event:Null<String>, callback:(String, Dynamic, String) -> Dynamic):Float;
 	/**
 		Removes the subscriber with `id`.
 	**/
@@ -67,7 +67,7 @@ package electron.remote;
 	/**
 		Add the specified defaults to your application's `NSUserDefaults`.
 	**/
-	static function registerDefaults(defaults:Record):Void;
+	static function registerDefaults(defaults:Dynamic):Void;
 	/**
 		The value of `key` in `NSUserDefaults`.
 		
@@ -81,7 +81,7 @@ package electron.remote;
 		* `NSPreferredWebServices`: `dictionary`
 		* `NSUserDictionaryReplacementItems`: `array`
 	**/
-	static function getUserDefault(key:String, type:Type):UserDefaultTypes[Type];
+	static function getUserDefault(key:String, type:Type):Dynamic;
 	/**
 		Set the value of `key` in `NSUserDefaults`.
 		
@@ -91,7 +91,7 @@ package electron.remote;
 		
 		* `ApplePressAndHoldEnabled`: `boolean`
 	**/
-	static function setUserDefault(key:String, type:Type, value:UserDefaultTypes[Type]):Void;
+	static function setUserDefault(key:String, type:Type, value:Dynamic):Void;
 	/**
 		Removes the `key` in `NSUserDefaults`. This can be used to restore the default or global value of a `key` previously set with `setUserDefault`.
 	**/
@@ -135,7 +135,7 @@ package electron.remote;
 		
 		This API itself will not protect your user data; rather, it is a mechanism to allow you to do so. Native apps will need to set Access Control Constants like `kSecAccessControlUserPresence` on their keychain entry so that reading it would auto-prompt for Touch ID biometric consent. This could be done with `node-keytar`, such that one would store an encryption key with `node-keytar` and only fetch it if `promptTouchID()` resolves.
 	**/
-	static function promptTouchID(reason:String):js.lib.Promise<Dynamic>;
+	static function promptTouchID(reason:String):js.lib.Promise<Void>;
 	/**
 		`true` if the current process is a trusted accessibility client and `false` if it is not.
 	**/
@@ -155,7 +155,7 @@ package electron.remote;
 		
 		This user consent was not required until macOS 10.14 Mojave, so this method will always return `true` if your system is running 10.13 High Sierra.
 	**/
-	static function askForMediaAccess(mediaType:String):js.lib.Promise<Dynamic>;
+	static function askForMediaAccess(mediaType:String):js.lib.Promise<Bool>;
 	/**
 		* `shouldRenderRichAnimation` boolean - Returns true if rich animations should be rendered. Looks at session type (e.g. remote desktop) and accessibility settings to give guidance for heavy animations.
 		* `scrollAnimationsEnabledBySystem` boolean - Determines on a per-platform basis whether scroll animations (e.g. produced by home/end key) should be enabled.
@@ -166,14 +166,11 @@ package electron.remote;
 	static function getAnimationSettings():{ /**
 		Returns true if rich animations should be rendered. Looks at session type (e.g. remote desktop) and accessibility settings to give guidance for heavy animations.
 	**/
-	@:optional
 	var shouldRenderRichAnimation : Bool; /**
 		Determines on a per-platform basis whether scroll animations (e.g. produced by home/end key) should be enabled.
 	**/
-	@:optional
 	var scrollAnimationsEnabledBySystem : Bool; /**
 		Determines whether the user desires reduced motion based on platform APIs.
 	**/
-	@:optional
 	var prefersReducedMotion : Bool; };
 }

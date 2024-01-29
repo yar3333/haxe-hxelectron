@@ -1,4 +1,4 @@
-package electron;
+package electron.main;
 
 /**
 **/
@@ -41,9 +41,7 @@ package electron;
 		
 		Returns an Object containing `title` and `url` keys representing the bookmark in the clipboard. The `title` and `url` values will be empty strings when the bookmark is unavailable.  The `title` value will always be empty on Windows.
 	**/
-	static function readBookmark():{ @:optional
-	var title : String; @:optional
-	var url : String; };
+	static function readBookmark():{ var title : String; var url : String; };
 	/**
 		Writes the `title` (macOS only) and `url` into the clipboard as a bookmark.
 		

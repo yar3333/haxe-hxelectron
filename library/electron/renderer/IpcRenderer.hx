@@ -6,23 +6,23 @@ package electron.renderer;
 	/**
 		Listens to `channel`, when a new message arrives `listener` would be called with `listener(event, args...)`.
 	**/
-	static function on(channel:String, listener:haxe.Constraints.Function):Void;
+	static function on(channel:String, listener:(IpcRendererEvent, Array<Dynamic>) -> Dynamic):Void;
 	/**
 		Alias for `ipcRenderer.removeListener`.
 	**/
-	static function off(channel:String, listener:haxe.Constraints.Function):Void;
+	static function off(channel:String, listener:(IpcRendererEvent, Array<Dynamic>) -> Dynamic):Void;
 	/**
 		Adds a one time `listener` function for the event. This `listener` is invoked only the next time a message is sent to `channel`, after which it is removed.
 	**/
-	static function once(channel:String, listener:haxe.Constraints.Function):Void;
+	static function once(channel:String, listener:(IpcRendererEvent, Array<Dynamic>) -> Dynamic):Void;
 	/**
 		Alias for `ipcRenderer.on`.
 	**/
-	static function addListener(channel:String, listener:haxe.Constraints.Function):Void;
+	static function addListener(channel:String, listener:(IpcRendererEvent, Array<Dynamic>) -> Dynamic):Void;
 	/**
 		Removes the specified `listener` from the listener array for the specified `channel`.
 	**/
-	static function removeListener(channel:String, listener:haxe.Constraints.Function):Void;
+	static function removeListener(channel:String, listener:(IpcRendererEvent, Array<Dynamic>) -> Dynamic):Void;
 	/**
 		Removes all listeners, or those of the specified `channel`.
 	**/
@@ -74,7 +74,7 @@ package electron.renderer;
 		
 		> :warning: **WARNING**: Sending a synchronous message will block the whole renderer process until the reply is received, so use this method only as a last resort. It's much better to use the asynchronous version, `invoke()`.
 	**/
-	static function sendSync(channel:String, args:haxe.extern.Rest<Any>):Any;
+	static function sendSync(channel:String, args:haxe.extern.Rest<Any>):Dynamic;
 	/**
 		Send a message to the main process, optionally transferring ownership of zero or more `MessagePort` objects.
 		
@@ -84,7 +84,7 @@ package electron.renderer;
 		
 		For more information on using `MessagePort` and `MessageChannel`, see the MDN documentation.
 	**/
-	static function postMessage(channel:String, message:Any, ?transfer:Array<MessagePort>):Void;
+	static function postMessage(channel:String, message:Dynamic, ?transfer:Array<MessagePort>):Void;
 	/**
 		Like `ipcRenderer.send` but the event will be sent to the `<webview>` element in the host page instead of the main process.
 	**/

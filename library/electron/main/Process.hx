@@ -1,4 +1,4 @@
-package electron;
+package electron.main;
 
 /**
 **/
@@ -12,7 +12,7 @@ package electron;
 		
 		Indicates the creation time of the application. The time is represented as number of milliseconds since epoch. It returns null if it is unable to get the process creation time.
 	**/
-	static function getCreationTime():Dynamic;
+	static function getCreationTime():Null<Float>;
 	static function getCPUUsage():CPUUsage;
 	static function getIOCounters():IOCounters;
 	/**
@@ -28,16 +28,7 @@ package electron;
 		
 		Returns an object with V8 heap statistics. Note that all statistics are reported in Kilobytes.
 	**/
-	static function getHeapStatistics():{ @:optional
-	var totalHeapSize : Int; @:optional
-	var totalHeapSizeExecutable : Int; @:optional
-	var totalPhysicalSize : Int; @:optional
-	var totalAvailableSize : Int; @:optional
-	var usedHeapSize : Int; @:optional
-	var heapSizeLimit : Int; @:optional
-	var mallocedMemory : Int; @:optional
-	var peakMallocedMemory : Int; @:optional
-	var doesZapGarbage : Bool; };
+	static function getHeapStatistics():{ var totalHeapSize : Int; var totalHeapSizeExecutable : Int; var totalPhysicalSize : Int; var totalAvailableSize : Int; var usedHeapSize : Int; var heapSizeLimit : Int; var mallocedMemory : Int; var peakMallocedMemory : Int; var doesZapGarbage : Bool; };
 	/**
 		* `allocated` Integer - Size of all allocated objects in Kilobytes.
 		* `total` Integer - Total allocated space in Kilobytes.
@@ -47,11 +38,9 @@ package electron;
 	static function getBlinkMemoryInfo():{ /**
 		Size of all allocated objects in Kilobytes.
 	**/
-	@:optional
 	var allocated : Int; /**
 		Total allocated space in Kilobytes.
 	**/
-	@:optional
 	var total : Int; };
 	/**
 		Resolves with a ProcessMemoryInfo
@@ -60,7 +49,7 @@ package electron;
 		
 		Chromium does not provide `residentSet` value for macOS. This is because macOS performs in-memory compression of pages that haven't been recently used. As a result the resident set size value is not what one would expect. `private` memory is more representative of the actual pre-compression memory usage of the process on macOS.
 	**/
-	static function getProcessMemoryInfo():js.lib.Promise<Dynamic>;
+	static function getProcessMemoryInfo():js.lib.Promise<ProcessMemoryInfo>;
 	/**
 		* `total` Integer - The total amount of physical memory in Kilobytes available to the system.
 		* `free` Integer - The total amount of memory not being used by applications or disk cache.
@@ -72,19 +61,15 @@ package electron;
 	static function getSystemMemoryInfo():{ /**
 		The total amount of physical memory in Kilobytes available to the system.
 	**/
-	@:optional
 	var total : Int; /**
 		The total amount of memory not being used by applications or disk cache.
 	**/
-	@:optional
 	var free : Int; /**
 		The total amount of swap memory in Kilobytes available to the system.
 	**/
-	@:optional
 	var swapTotal : Int; /**
 		The free amount of swap memory in Kilobytes available to the system.
 	**/
-	@:optional
 	var swapFree : Int; };
 	/**
 		The version of the host operating system.

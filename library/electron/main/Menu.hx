@@ -17,7 +17,7 @@ Process: Main
 		
 		Each `Menu` consists of multiple `MenuItem`s and each `MenuItem` can have a submenu.
 	**/
-	var items : MenuItem;
+	var items : Array<MenuItem>;
 	function new():Void;
 	/**
 		Pops up this menu as a context menu in the `BrowserWindow`.
@@ -46,7 +46,7 @@ Process: Main
 		Called when menu is closed.
 	**/
 	@:optional
-	var callback : haxe.Constraints.Function; }):Void;
+	var callback : () -> Dynamic; }):Void;
 	/**
 		Closes the context menu in the `browserWindow`.
 	**/
@@ -58,7 +58,7 @@ Process: Main
 	/**
 		the item with the specified `id`
 	**/
-	function getMenuItemById(id:String):Dynamic;
+	function getMenuItemById(id:String):Null<MenuItem>;
 	/**
 		Inserts the `menuItem` to the `pos` position of the menu.
 	**/
@@ -74,13 +74,13 @@ Process: Main
 		
 		**Note:** The default menu will be created automatically if the app does not set one. It contains standard items such as `File`, `Edit`, `View`, `Window` and `Help`.
 	**/
-	static function setApplicationMenu(menu:Dynamic):Void;
+	static function setApplicationMenu(menu:Null<Menu>):Void;
 	/**
 		The application menu, if set, or `null`, if not set.
 		
 		**Note:** The returned `Menu` instance doesn't support dynamic addition or removal of menu items. Instance properties can still be dynamically modified.
 	**/
-	static function getApplicationMenu():Dynamic;
+	static function getApplicationMenu():Null<Menu>;
 	/**
 		Sends the `action` to the first responder of application. This is used for emulating default macOS menu behaviors. Usually you would use the `role` property of a `MenuItem`.
 		
@@ -92,7 +92,7 @@ Process: Main
 		
 		You can also attach other fields to the element of the `template` and they will become properties of the constructed menu items.
 	**/
-	static function buildFromTemplate(template:Array<Dynamic>):Menu;
+	static function buildFromTemplate(template:haxe.extern.EitherType<Dynamic, MenuItem>):Menu;
 }
 
 /**

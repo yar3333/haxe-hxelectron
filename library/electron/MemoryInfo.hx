@@ -1,5 +1,7 @@
 package electron;
 
+import electron.main.*;
+
 /**
 	Note that all statistics are reported in Kilobytes.
 
@@ -17,5 +19,6 @@ package electron;
 	/**
 		The amount of memory not shared by other processes, such as JS heap or HTML content.
 	**/
+	@:optional
 	var privateBytes : Int;
 }

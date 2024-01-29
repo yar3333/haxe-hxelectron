@@ -69,7 +69,7 @@ app.whenReady().then(() => {
 	See: <https://electronjs.org/docs/api/tray>
 **/
 @:require(js, hxelectron) @:jsRequire("electron", "Tray") extern class Tray extends js.node.events.EventEmitter<electron.main.Tray> {
-	function new(image:Dynamic, ?guid:String):Void;
+	function new(image:haxe.extern.EitherType<NativeImage, String>, ?guid:String):Void;
 	/**
 		Destroys the tray icon immediately.
 	**/
@@ -77,11 +77,11 @@ app.whenReady().then(() => {
 	/**
 		Sets the `image` associated with this tray icon.
 	**/
-	function setImage(image:Dynamic):Void;
+	function setImage(image:haxe.extern.EitherType<NativeImage, String>):Void;
 	/**
 		Sets the `image` associated with this tray icon when pressed on macOS.
 	**/
-	function setPressedImage(image:Dynamic):Void;
+	function setPressedImage(image:haxe.extern.EitherType<NativeImage, String>):Void;
 	/**
 		Sets the hover text for this tray icon.
 	**/
@@ -115,13 +115,11 @@ app.whenReady().then(() => {
 		Icon to use when `iconType` is `custom`.
 	**/
 	@:optional
-	var icon : Dynamic; /**
+	var icon : haxe.extern.EitherType<NativeImage, String>; /**
 		Can be `none`, `info`, `warning`, `error` or `custom`. Default is `custom`.
 	**/
 	@:optional
-	var iconType : String; @:optional
-	var title : String; @:optional
-	var content : String; /**
+	var iconType : String; var title : String; var content : String; /**
 		The large version of the icon should be used. Default is `true`. Maps to `NIIF_LARGE_ICON`.
 	**/
 	@:optional
@@ -155,7 +153,7 @@ app.whenReady().then(() => {
 	/**
 		Sets the context menu for this icon.
 	**/
-	function setContextMenu(menu:Dynamic):Void;
+	function setContextMenu(menu:Null<Menu>):Void;
 	/**
 		The `bounds` of this tray icon as `Object`.
 	**/

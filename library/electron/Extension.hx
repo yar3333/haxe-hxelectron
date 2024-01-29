@@ -1,5 +1,7 @@
 package electron;
 
+import electron.main.*;
+
 /**
 	
 
@@ -10,7 +12,7 @@ package electron;
 	/**
 		Copy of the extension's manifest data.
 	**/
-	var manifest : Any;
+	var manifest : Dynamic;
 	var name : String;
 	/**
 		The extension's file path.

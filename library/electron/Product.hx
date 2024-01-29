@@ -1,5 +1,7 @@
 package electron;
 
+import electron.main.*;
+
 /**
 	
 
@@ -33,6 +35,7 @@ package electron;
 	/**
 		The object containing introductory price information for the product. available for the product.
 	**/
+	@:optional
 	var introductoryPrice : ProductDiscount;
 	/**
 		An array of discount offers
@@ -45,6 +48,7 @@ package electron;
 	/**
 		The period details for products that are subscriptions.
 	**/
+	@:optional
 	var subscriptionPeriod : ProductSubscriptionPeriod;
 	/**
 		A boolean value that indicates whether the App Store has downloadable content for this product. `true` if at least one file has been associated with the product.

@@ -1,5 +1,7 @@
 package electron;
 
+import electron.main.*;
+
 /**
 	
 
@@ -9,9 +11,11 @@ package electron;
 	/**
 		The text to appear in this item.
 	**/
+	@:optional
 	var label : String;
 	/**
 		The image to appear in this item.
 	**/
+	@:optional
 	var icon : NativeImage;
 }

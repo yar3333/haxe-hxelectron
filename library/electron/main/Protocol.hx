@@ -32,7 +32,7 @@ package electron.main;
 		
 		See the MDN docs for `Request` and `Response` for more details.
 	**/
-	static function handle(scheme:String, handler:haxe.Constraints.Function):Void;
+	static function handle(scheme:String, handler:GlobalRequest -> haxe.extern.EitherType<GlobalResponse, js.lib.Promise<GlobalResponse>>):Void;
 	/**
 		Removes a protocol handler registered with `protocol.handle`.
 	**/
@@ -50,7 +50,7 @@ package electron.main;
 		
 		By default the `scheme` is treated like `http:`, which is parsed differently from protocols that follow the "generic URI syntax" like `file:`.
 	**/
-	static function registerFileProtocol(scheme:String, handler:haxe.Constraints.Function):Bool;
+	static function registerFileProtocol(scheme:String, handler:(ProtocolRequest, haxe.extern.EitherType<String, ProtocolResponse> -> Dynamic) -> Dynamic):Bool;
 	/**
 		Whether the protocol was successfully registered
 		
@@ -60,7 +60,7 @@ package electron.main;
 		
 		Example:
 	**/
-	static function registerBufferProtocol(scheme:String, handler:haxe.Constraints.Function):Bool;
+	static function registerBufferProtocol(scheme:String, handler:(ProtocolRequest, haxe.extern.EitherType<js.node.Buffer, ProtocolResponse> -> Dynamic) -> Dynamic):Bool;
 	/**
 		Whether the protocol was successfully registered
 		
@@ -68,7 +68,7 @@ package electron.main;
 		
 		The usage is the same with `registerFileProtocol`, except that the `callback` should be called with either a `string` or an object that has the `data` property.
 	**/
-	static function registerStringProtocol(scheme:String, handler:haxe.Constraints.Function):Bool;
+	static function registerStringProtocol(scheme:String, handler:(ProtocolRequest, haxe.extern.EitherType<String, ProtocolResponse> -> Dynamic) -> Dynamic):Bool;
 	/**
 		Whether the protocol was successfully registered
 		
@@ -76,7 +76,7 @@ package electron.main;
 		
 		The usage is the same with `registerFileProtocol`, except that the `callback` should be called with an object that has the `url` property.
 	**/
-	static function registerHttpProtocol(scheme:String, handler:haxe.Constraints.Function):Bool;
+	static function registerHttpProtocol(scheme:String, handler:(ProtocolRequest, ProtocolResponse -> Dynamic) -> Dynamic):Bool;
 	/**
 		Whether the protocol was successfully registered
 		
@@ -88,7 +88,7 @@ package electron.main;
 		
 		It is possible to pass any object that implements the readable stream API (emits `data`/`end`/`error` events). For example, here's how a file could be returned:
 	**/
-	static function registerStreamProtocol(scheme:String, handler:haxe.Constraints.Function):Bool;
+	static function registerStreamProtocol(scheme:String, handler:(ProtocolRequest, haxe.extern.EitherType<ReadableStream, ProtocolResponse> -> Dynamic) -> Dynamic):Bool;
 	/**
 		Whether the protocol was successfully unregistered
 		
@@ -104,31 +104,31 @@ package electron.main;
 		
 		Intercepts `scheme` protocol and uses `handler` as the protocol's new handler which sends a file as a response.
 	**/
-	static function interceptFileProtocol(scheme:String, handler:haxe.Constraints.Function):Bool;
+	static function interceptFileProtocol(scheme:String, handler:(ProtocolRequest, haxe.extern.EitherType<String, ProtocolResponse> -> Dynamic) -> Dynamic):Bool;
 	/**
 		Whether the protocol was successfully intercepted
 		
 		Intercepts `scheme` protocol and uses `handler` as the protocol's new handler which sends a `string` as a response.
 	**/
-	static function interceptStringProtocol(scheme:String, handler:haxe.Constraints.Function):Bool;
+	static function interceptStringProtocol(scheme:String, handler:(ProtocolRequest, haxe.extern.EitherType<String, ProtocolResponse> -> Dynamic) -> Dynamic):Bool;
 	/**
 		Whether the protocol was successfully intercepted
 		
 		Intercepts `scheme` protocol and uses `handler` as the protocol's new handler which sends a `Buffer` as a response.
 	**/
-	static function interceptBufferProtocol(scheme:String, handler:haxe.Constraints.Function):Bool;
+	static function interceptBufferProtocol(scheme:String, handler:(ProtocolRequest, haxe.extern.EitherType<js.node.Buffer, ProtocolResponse> -> Dynamic) -> Dynamic):Bool;
 	/**
 		Whether the protocol was successfully intercepted
 		
 		Intercepts `scheme` protocol and uses `handler` as the protocol's new handler which sends a new HTTP request as a response.
 	**/
-	static function interceptHttpProtocol(scheme:String, handler:haxe.Constraints.Function):Bool;
+	static function interceptHttpProtocol(scheme:String, handler:(ProtocolRequest, ProtocolResponse -> Dynamic) -> Dynamic):Bool;
 	/**
 		Whether the protocol was successfully intercepted
 		
 		Same as `protocol.registerStreamProtocol`, except that it replaces an existing protocol handler.
 	**/
-	static function interceptStreamProtocol(scheme:String, handler:haxe.Constraints.Function):Bool;
+	static function interceptStreamProtocol(scheme:String, handler:(ProtocolRequest, haxe.extern.EitherType<ReadableStream, ProtocolResponse> -> Dynamic) -> Dynamic):Bool;
 	/**
 		Whether the protocol was successfully unintercepted
 		

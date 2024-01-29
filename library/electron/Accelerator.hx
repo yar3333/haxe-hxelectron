@@ -1,7 +1,7 @@
 package electron;
 
+import electron.main.*;
+
 /**
 **/
-@:require(js, hxelectron) abstract Accelerator(String) from String to String {
-
-}
+@:require(js, hxelectron) typedef Accelerator = Dynamic;

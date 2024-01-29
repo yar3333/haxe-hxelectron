@@ -6,12 +6,11 @@ package electron.main;
 	/**
 		Sets the `url` and initialize the auto updater.
 	**/
-	static function setFeedURL(options:{ @:optional
-	var url : String; /**
+	static function setFeedURL(options:{ var url : String; /**
 		HTTP request headers.
 	**/
 	@:optional
-	var headers : Record; /**
+	var headers : Dynamic; /**
 		Can be `json` or `default`, see the Squirrel.Mac README for more information.
 	**/
 	@:optional

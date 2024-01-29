@@ -1,8 +1,8 @@
-package electron;
+package electron.remote;
 
 /**
 **/
-@:require(js, hxelectron) @:jsRequire("electron", "shell") extern class Shell {
+@:require(js, hxelectron) @:jsRequire("electron", "remote.shell") extern class Shell {
 	/**
 		Show the given file in a file manager. If possible, select the file.
 	**/
@@ -12,7 +12,7 @@ package electron;
 		
 		Open the given file in the desktop's default manner.
 	**/
-	static function openPath(path:String):js.lib.Promise<Dynamic>;
+	static function openPath(path:String):js.lib.Promise<String>;
 	/**
 		Open the given external protocol URL in the desktop's default manner. (For example, mailto: URLs in the user's default mail agent).
 	**/
@@ -28,13 +28,13 @@ package electron;
 		Indicates a user initiated launch that enables tracking of frequently used programs and other behaviors. The default is `false`.
 	**/
 	@:optional
-	var logUsage : Bool; }):js.lib.Promise<Dynamic>;
+	var logUsage : Bool; }):js.lib.Promise<Void>;
 	/**
 		Resolves when the operation has been completed. Rejects if there was an error while deleting the requested item.
 		
 		This moves a path to the OS-specific trash location (Trash on macOS, Recycle Bin on Windows, and a desktop-environment-specific location on Linux).
 	**/
-	static function trashItem(path:String):js.lib.Promise<Dynamic>;
+	static function trashItem(path:String):js.lib.Promise<Void>;
 	/**
 		Play the beep sound.
 	**/

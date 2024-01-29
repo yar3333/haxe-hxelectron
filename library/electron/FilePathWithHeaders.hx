@@ -1,5 +1,7 @@
 package electron;
 
+import electron.main.*;
+
 /**
 	
 
@@ -13,5 +15,6 @@ package electron;
 	/**
 		Additional headers to be sent.
 	**/
-	var headers : Record;
+	@:optional
+	var headers : Dynamic;
 }

@@ -33,7 +33,7 @@ package electron.main;
 		Create security scoped bookmarks when packaged for the Mac App Store.
 	**/
 	@:optional
-	var securityScopedBookmarks : Bool; }):Dynamic;
+	var securityScopedBookmarks : Bool; }):Null<Array<String>>;
 	/**
 		Resolve with an object containing the following:
 		
@@ -68,7 +68,17 @@ package electron.main;
 		Create security scoped bookmarks when packaged for the Mac App Store.
 	**/
 	@:optional
-	var securityScopedBookmarks : Bool; }):js.lib.Promise<Dynamic>;
+	var securityScopedBookmarks : Bool; }):js.lib.Promise<{ /**
+		whether or not the dialog was canceled.
+	**/
+	var canceled : Bool; /**
+		An array of file paths chosen by the user. If the dialog is cancelled this will be an empty array.
+	**/
+	var filePaths : Array<String>; /**
+		An array matching the `filePaths` array of base64 encoded strings which contains security scoped bookmark data. `securityScopedBookmarks` must be enabled for this to be populated. (For return values, see table here.)
+	**/
+	@:optional
+	var bookmarks : Array<String>; }>;
 	/**
 		the path of the file chosen by the user; if the dialog is cancelled it returns `undefined`.
 		
@@ -106,7 +116,7 @@ package electron.main;
 		Create a security scoped bookmark when packaged for the Mac App Store. If this option is enabled and the file doesn't already exist a blank file will be created at the chosen path.
 	**/
 	@:optional
-	var securityScopedBookmarks : Bool; }):Dynamic;
+	var securityScopedBookmarks : Bool; }):Null<String>;
 	/**
 		Resolve with an object containing the following:
 		
@@ -150,7 +160,18 @@ package electron.main;
 		Create a security scoped bookmark when packaged for the Mac App Store. If this option is enabled and the file doesn't already exist a blank file will be created at the chosen path.
 	**/
 	@:optional
-	var securityScopedBookmarks : Bool; }):js.lib.Promise<Dynamic>;
+	var securityScopedBookmarks : Bool; }):js.lib.Promise<{ /**
+		whether or not the dialog was canceled.
+	**/
+	var canceled : Bool; /**
+		If the dialog is canceled, this will be `undefined`.
+	**/
+	@:optional
+	var filePath : String; /**
+		Base64 encoded string which contains the security scoped bookmark data for the saved file. `securityScopedBookmarks` must be enabled for this to be present. (For return values, see table here.)
+	**/
+	@:optional
+	var bookmark : String; }>;
 	/**
 		the index of the clicked button.
 		
@@ -161,7 +182,6 @@ package electron.main;
 	static function showMessageBoxSync(?browserWindow:BrowserWindow, options:{ /**
 		Content of the message box.
 	**/
-	@:optional
 	var message : String; /**
 		Can be `none`, `info`, `error`, `question` or `warning`. On Windows, `question` displays the same icon as `info`, unless you set an icon using the `icon` option. On macOS, both `warning` and `error` display the same warning icon.
 	**/
@@ -183,7 +203,7 @@ package electron.main;
 	**/
 	@:optional
 	var detail : String; @:optional
-	var icon : Dynamic; /**
+	var icon : haxe.extern.EitherType<NativeImage, String>; /**
 		Custom width of the text in the message box.
 	**/
 	@:optional
@@ -213,7 +233,6 @@ package electron.main;
 	static function showMessageBox(?browserWindow:BrowserWindow, options:{ /**
 		Content of the message box.
 	**/
-	@:optional
 	var message : String; /**
 		Can be `none`, `info`, `error`, `question` or `warning`. On Windows, `question` displays the same icon as `info`, unless you set an icon using the `icon` option. On macOS, both `warning` and `error` display the same warning icon.
 	**/
@@ -230,7 +249,7 @@ package electron.main;
 		Pass an instance of AbortSignal to optionally close the message box, the message box will behave as if it was cancelled by the user. On macOS, `signal` does not work with message boxes that do not have a parent window, since those message boxes run synchronously due to platform limitations.
 	**/
 	@:optional
-	var signal : AbortSignal; /**
+	var signal : Dynamic; /**
 		Title of the message box, some platforms will not show it.
 	**/
 	@:optional
@@ -247,7 +266,7 @@ package electron.main;
 	**/
 	@:optional
 	var checkboxChecked : Bool; @:optional
-	var icon : Dynamic; /**
+	var icon : haxe.extern.EitherType<NativeImage, String>; /**
 		Custom width of the text in the message box.
 	**/
 	@:optional
@@ -263,7 +282,13 @@ package electron.main;
 		Normalize the keyboard access keys across platforms. Default is `false`. Enabling this assumes `&` is used in the button labels for the placement of the keyboard shortcut access key and labels will be converted so they work correctly on each platform, `&` characters are removed on macOS, converted to `_` on Linux, and left untouched on Windows. For example, a button label of `Vie&w` will be converted to `Vie_w` on Linux and `View` on macOS and can be selected via `Alt-W` on Windows and Linux.
 	**/
 	@:optional
-	var normalizeAccessKeys : Bool; }):js.lib.Promise<Dynamic>;
+	var normalizeAccessKeys : Bool; }):js.lib.Promise<{ /**
+		The index of the clicked button.
+	**/
+	var response : Float; /**
+		The checked state of the checkbox if `checkboxLabel` was set. Otherwise `false`.
+	**/
+	var checkboxChecked : Bool; }>;
 	/**
 		Displays a modal dialog that shows an error message.
 		
@@ -283,10 +308,8 @@ package electron.main;
 	static function showCertificateTrustDialog(?browserWindow:BrowserWindow, options:{ /**
 		The certificate to trust/import.
 	**/
-	@:optional
 	var certificate : Certificate; /**
 		The message to display to the user.
 	**/
-	@:optional
-	var message : String; }):js.lib.Promise<Dynamic>;
+	var message : String; }):js.lib.Promise<Void>;
 }

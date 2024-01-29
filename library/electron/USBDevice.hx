@@ -1,5 +1,7 @@
 package electron;
 
+import electron.main.*;
+
 /**
 	
 
@@ -21,14 +23,17 @@ package electron;
 	/**
 		Name of the device.
 	**/
+	@:optional
 	var productName : String;
 	/**
 		The USB device serial number.
 	**/
+	@:optional
 	var serialNumber : String;
 	/**
 		The manufacturer name of the device.
 	**/
+	@:optional
 	var manufacturerName : String;
 	/**
 		The USB protocol major version supported by the device

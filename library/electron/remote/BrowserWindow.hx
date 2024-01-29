@@ -130,6 +130,7 @@ It creates a new `BrowserWindow` with native properties as set by the `options`.
 	/**
 		A `string` (optional) property that is equal to the `tabbingIdentifier` passed to the `BrowserWindow` constructor or `undefined` if none was set.
 	**/
+	@:optional
 	var tabbingIdentifier : String;
 	/**
 		A `boolean` property that determines whether the window menu bar should hide itself automatically. Once set, the menu bar will only show when users press the single `Alt` key.
@@ -369,7 +370,7 @@ It creates a new `BrowserWindow` with native properties as set by the `options`.
 		
 		**Note:** On macOS, the y-coordinate value cannot be smaller than the Tray height. The tray height has changed over time and depends on the operating system, but is between 20-40px. Passing a value lower than the tray height will result in a window that is flush to the tray.
 	**/
-	function setBounds(bounds:Partial, ?animate:Bool):Void;
+	function setBounds(bounds:Dynamic, ?animate:Bool):Void;
 	/**
 		The `bounds` of the window as `Object`.
 		
@@ -583,7 +584,7 @@ It creates a new `BrowserWindow` with native properties as set by the `options`.
 	/**
 		Hooks a windows message. The `callback` is called when the message is received in the WndProc.
 	**/
-	function hookWindowMessage(message:Int, callback:haxe.Constraints.Function):Void;
+	function hookWindowMessage(message:Int, callback:(js.node.Buffer, js.node.Buffer) -> Dynamic):Void;
 	/**
 		`true` or `false` depending on whether the message is hooked.
 	**/
@@ -627,7 +628,7 @@ It creates a new `BrowserWindow` with native properties as set by the `options`.
 		 Keep the system awake instead of allowing it to sleep. Default is `false`.
 	**/
 	@:optional
-	var stayAwake : Bool; }):js.lib.Promise<Dynamic>;
+	var stayAwake : Bool; }):js.lib.Promise<NativeImage>;
 	/**
 		the promise will resolve when the page has finished loading (see `did-finish-load`), and rejects if the page fails to load (see `did-fail-load`).
 		
@@ -643,7 +644,7 @@ It creates a new `BrowserWindow` with native properties as set by the `options`.
 		An HTTP Referrer URL.
 	**/
 	@:optional
-	var httpReferrer : Dynamic; /**
+	var httpReferrer : haxe.extern.EitherType<String, Referrer>; /**
 		A user agent originating the request.
 	**/
 	@:optional
@@ -652,11 +653,11 @@ It creates a new `BrowserWindow` with native properties as set by the `options`.
 	**/
 	@:optional
 	var extraHeaders : String; @:optional
-	var postData : Array<Dynamic>; /**
+	var postData : haxe.extern.EitherType<UploadRawData, UploadFile>; /**
 		Base URL (with trailing path separator) for files to be loaded by the data URL. This is needed only if the specified `url` is a data URL and needs to load other files.
 	**/
 	@:optional
-	var baseURLForDataURL : String; }):js.lib.Promise<Dynamic>;
+	var baseURLForDataURL : String; }):js.lib.Promise<Void>;
 	/**
 		the promise will resolve when the page has finished loading (see `did-finish-load`), and rejects if the page fails to load (see `did-fail-load`).
 		
@@ -666,7 +667,7 @@ It creates a new `BrowserWindow` with native properties as set by the `options`.
 		Passed to `url.format()`.
 	**/
 	@:optional
-	var query : Record; /**
+	var query : Dynamic; /**
 		Passed to `url.format()`.
 	**/
 	@:optional
@@ -674,7 +675,7 @@ It creates a new `BrowserWindow` with native properties as set by the `options`.
 		Passed to `url.format()`.
 	**/
 	@:optional
-	var hash : String; }):js.lib.Promise<Dynamic>;
+	var hash : String; }):js.lib.Promise<Void>;
 	/**
 		Same as `webContents.reload`.
 	**/
@@ -682,7 +683,7 @@ It creates a new `BrowserWindow` with native properties as set by the `options`.
 	/**
 		Sets the `menu` as the window's menu bar.
 	**/
-	function setMenu(menu:Dynamic):Void;
+	function setMenu(menu:Null<Menu>):Void;
 	/**
 		Remove the window's menu bar.
 	**/
@@ -699,12 +700,11 @@ It creates a new `BrowserWindow` with native properties as set by the `options`.
 	function setProgressBar(progress:Float, ?options:{ /**
 		Mode for the progress bar. Can be `none`, `normal`, `indeterminate`, `error` or `paused`.
 	**/
-	@:optional
 	var mode : String; }):Void;
 	/**
 		Sets a 16 x 16 pixel overlay onto the current taskbar icon, usually used to convey some sort of application status or to passively notify the user.
 	**/
-	function setOverlayIcon(overlay:Dynamic, description:String):Void;
+	function setOverlayIcon(overlay:Null<NativeImage>, description:String):Void;
 	/**
 		Invalidates the window shadow so that it is recomputed based on the current window shape.
 		
@@ -797,7 +797,7 @@ It creates a new `BrowserWindow` with native properties as set by the `options`.
 	/**
 		Changes window icon.
 	**/
-	function setIcon(icon:Dynamic):Void;
+	function setIcon(icon:haxe.extern.EitherType<NativeImage, String>):Void;
 	/**
 		Sets whether the window traffic light buttons should be visible.
 	**/
@@ -869,11 +869,11 @@ It creates a new `BrowserWindow` with native properties as set by the `options`.
 	/**
 		Sets `parent` as current window's parent window, passing `null` will turn current window into a top-level window.
 	**/
-	function setParentWindow(parent:Dynamic):Void;
+	function setParentWindow(parent:Null<BrowserWindow>):Void;
 	/**
 		The parent window or `null` if there is no parent.
 	**/
-	function getParentWindow():Dynamic;
+	function getParentWindow():Null<BrowserWindow>;
 	/**
 		All child windows.
 	**/
@@ -913,7 +913,7 @@ It creates a new `BrowserWindow` with native properties as set by the `options`.
 	/**
 		Adds a vibrancy effect to the browser window. Passing `null` or an empty string will remove the vibrancy effect on the window.
 	**/
-	function setVibrancy(type:Dynamic):Void;
+	function setVibrancy(type:Null<String>):Void;
 	/**
 		This method sets the browser window's system-drawn background material, including behind the non-client area.
 		
@@ -925,22 +925,22 @@ It creates a new `BrowserWindow` with native properties as set by the `options`.
 	/**
 		Set a custom position for the traffic light buttons in frameless window. Passing `null` will reset the position to default.
 	**/
-	function setWindowButtonPosition(position:Dynamic):Void;
+	function setWindowButtonPosition(position:Null<Point>):Void;
 	/**
 		The custom position for the traffic light buttons in frameless window, `null` will be returned when there is no custom position.
 	**/
-	function getWindowButtonPosition():Dynamic;
+	function getWindowButtonPosition():Null<Point>;
 	/**
 		Sets the touchBar layout for the current window. Specifying `null` or `undefined` clears the touch bar. This method only has an effect if the machine has a touch bar.
 		
 		**Note:** The TouchBar API is currently experimental and may change or be removed in future Electron releases.
 	**/
-	function setTouchBar(touchBar:Dynamic):Void;
-	function setBrowserView(browserView:Dynamic):Void;
+	function setTouchBar(touchBar:Null<TouchBar>):Void;
+	function setBrowserView(browserView:Null<BrowserView>):Void;
 	/**
 		The `BrowserView` attached to `win`. Returns `null` if one is not attached. Throws an error if multiple `BrowserView`s are attached.
 	**/
-	function getBrowserView():Dynamic;
+	function getBrowserView():Null<BrowserView>;
 	/**
 		Replacement API for setBrowserView supporting work with multi browser views.
 	**/
@@ -979,19 +979,19 @@ It creates a new `BrowserWindow` with native properties as set by the `options`.
 	/**
 		The window that is focused in this application, otherwise returns `null`.
 	**/
-	static function getFocusedWindow():Dynamic;
+	static function getFocusedWindow():Null<BrowserWindow>;
 	/**
 		The window that owns the given `webContents` or `null` if the contents are not owned by a window.
 	**/
-	static function fromWebContents(webContents:WebContents):Dynamic;
+	static function fromWebContents(webContents:WebContents):Null<BrowserWindow>;
 	/**
 		The window that owns the given `browserView`. If the given view is not attached to any window, returns `null`.
 	**/
-	static function fromBrowserView(browserView:BrowserView):Dynamic;
+	static function fromBrowserView(browserView:BrowserView):Null<BrowserWindow>;
 	/**
 		The window with the given `id`.
 	**/
-	static function fromId(id:Int):Dynamic;
+	static function fromId(id:Int):Null<BrowserWindow>;
 }
 
 /**

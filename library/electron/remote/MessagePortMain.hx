@@ -9,7 +9,7 @@ package electron.remote;
 	/**
 		Sends a message from the port, and optionally, transfers ownership of objects to other browsing contexts.
 	**/
-	function postMessage(message:Any, ?transfer:Array<MessagePortMain>):Void;
+	function postMessage(message:Dynamic, ?transfer:Array<MessagePortMain>):Void;
 	/**
 		Starts the sending of messages queued on the port. Messages will be queued until this method is called.
 	**/

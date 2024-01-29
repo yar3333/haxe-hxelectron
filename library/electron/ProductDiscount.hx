@@ -1,5 +1,7 @@
 package electron;
 
+import electron.main.*;
+
 /**
 	
 
@@ -33,5 +35,6 @@ package electron;
 	/**
 		An object that defines the period for the product discount.
 	**/
+	@:optional
 	var subscriptionPeriod : ProductSubscriptionPeriod;
 }

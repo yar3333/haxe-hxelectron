@@ -11,7 +11,6 @@ Process: Main<br /> _This class is not exported from the `'electron'` module. It
 	function new(options:{ /**
 		Items to display as a group.
 	**/
-	@:optional
 	var items : TouchBar; }):Void;
 }
 

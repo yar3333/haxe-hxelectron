@@ -6,15 +6,15 @@ package electron.main;
 	/**
 		Listens to `channel`, when a new message arrives `listener` would be called with `listener(event, args...)`.
 	**/
-	static function on(channel:String, listener:haxe.Constraints.Function):Void;
+	static function on(channel:String, listener:(IpcMainEvent, Array<Dynamic>) -> Dynamic):Void;
 	/**
 		Adds a one time `listener` function for the event. This `listener` is invoked only the next time a message is sent to `channel`, after which it is removed.
 	**/
-	static function once(channel:String, listener:haxe.Constraints.Function):Void;
+	static function once(channel:String, listener:(IpcMainEvent, Array<Dynamic>) -> Dynamic):Void;
 	/**
 		Removes the specified `listener` from the listener array for the specified `channel`.
 	**/
-	static function removeListener(channel:String, listener:haxe.Constraints.Function):Void;
+	static function removeListener(channel:String, listener:Array<Dynamic> -> Dynamic):Void;
 	/**
 		Removes listeners of the specified `channel`.
 	**/
@@ -28,11 +28,11 @@ package electron.main;
 		
 		Errors thrown through `handle` in the main process are not transparent as they are serialized and only the `message` property from the original error is provided to the renderer process. Please refer to #24427 for details.
 	**/
-	static function handle(channel:String, listener:haxe.Constraints.Function):Void;
+	static function handle(channel:String, listener:(IpcMainInvokeEvent, Array<Dynamic>) -> haxe.extern.EitherType<js.lib.Promise<Dynamic>, Dynamic>):Void;
 	/**
 		Handles a single `invoke`able IPC message, then removes the listener. See `ipcMain.handle(channel, listener)`.
 	**/
-	static function handleOnce(channel:String, listener:haxe.Constraints.Function):Void;
+	static function handleOnce(channel:String, listener:(IpcMainInvokeEvent, Array<Dynamic>) -> haxe.extern.EitherType<js.lib.Promise<Dynamic>, Dynamic>):Void;
 	/**
 		Removes any handler for `channel`, if present.
 	**/

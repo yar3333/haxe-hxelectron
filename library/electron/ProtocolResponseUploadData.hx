@@ -1,5 +1,7 @@
 package electron;
 
+import electron.main.*;
+
 /**
 	
 
@@ -13,5 +15,5 @@ package electron;
 	/**
 		Content to be sent.
 	**/
-	var data : Dynamic;
+	var data : haxe.extern.EitherType<String, js.node.Buffer>;
 }

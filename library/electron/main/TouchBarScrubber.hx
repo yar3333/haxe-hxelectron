@@ -11,7 +11,7 @@ Process: Main<br /> _This class is not exported from the `'electron'` module. It
 	/**
 		A `ScrubberItem[]` array representing the items in this scrubber. Updating this value immediately updates the control in the touch bar. Updating deep properties inside this array **does not update the touch bar**.
 	**/
-	var items : ScrubberItem;
+	var items : Array<ScrubberItem>;
 	/**
 		A `string` representing the style that selected items in the scrubber should have. Updating this value immediately updates the control in the touch bar. Possible values:
 		
@@ -46,16 +46,15 @@ Process: Main<br /> _This class is not exported from the `'electron'` module. It
 	function new(options:{ /**
 		An array of items to place in this scrubber.
 	**/
-	@:optional
 	var items : Array<ScrubberItem>; /**
 		Called when the user taps an item that was not the last tapped item.
 	**/
 	@:optional
-	var select : haxe.Constraints.Function; /**
+	var select : Int -> Dynamic; /**
 		Called when the user taps any item.
 	**/
 	@:optional
-	var highlight : haxe.Constraints.Function; /**
+	var highlight : Int -> Dynamic; /**
 		Selected item style. Can be `background`, `outline` or `none`. Defaults to `none`.
 	**/
 	@:optional

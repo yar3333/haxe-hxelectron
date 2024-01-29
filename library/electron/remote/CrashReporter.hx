@@ -1,8 +1,8 @@
-package electron;
+package electron.remote;
 
 /**
 **/
-@:require(js, hxelectron) @:jsRequire("electron", "crashReporter") extern class CrashReporter {
+@:require(js, hxelectron) @:jsRequire("electron", "remote.crashReporter") extern class CrashReporter {
 	/**
 		This method must be called before using any other `crashReporter` APIs. Once initialized this way, the crashpad handler collects crashes from all subsequently created processes. The crash reporter cannot be disabled once started.
 		
@@ -48,11 +48,11 @@ package electron;
 		Extra string key/value annotations that will be sent along with crash reports that are generated in the main process. Only string values are supported. Crashes generated in child processes will not contain these extra parameters to crash reports generated from child processes, call `addExtraParameter` from the child process.
 	**/
 	@:optional
-	var extra : Record; /**
+	var extra : Dynamic; /**
 		Extra string key/value annotations that will be sent along with any crash reports generated in any process. These annotations cannot be changed once the crash reporter has been started. If a key is present in both the global extra parameters and the process-specific extra parameters, then the global one will take precedence. By default, `productName` and the app version are included, as well as the Electron version.
 	**/
 	@:optional
-	var globalExtra : Record; }):Void;
+	var globalExtra : Dynamic; }):Void;
 	/**
 		The date and ID of the last crash report. Only crash reports that have been uploaded will be returned; even if a crash report is present on disk it will not be returned until it is uploaded. In the case that there are no uploaded reports, `null` is returned.
 		
@@ -92,5 +92,5 @@ package electron;
 	/**
 		The current 'extra' parameters of the crash reporter.
 	**/
-	static function getParameters():Record;
+	static function getParameters():Dynamic;
 }

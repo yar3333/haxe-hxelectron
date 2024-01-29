@@ -68,7 +68,7 @@ package electron.main;
 		
 		**Note:** Users should never store this object because it may become `null` when the DevTools has been closed.
 	**/
-	var devToolsWebContents : Dynamic;
+	var devToolsWebContents : Null<WebContents>;
 	/**
 		A `Debugger` instance for this webContents.
 	**/
@@ -94,7 +94,7 @@ package electron.main;
 		An HTTP Referrer url.
 	**/
 	@:optional
-	var httpReferrer : Dynamic; /**
+	var httpReferrer : haxe.extern.EitherType<String, Referrer>; /**
 		A user agent originating the request.
 	**/
 	@:optional
@@ -103,11 +103,11 @@ package electron.main;
 	**/
 	@:optional
 	var extraHeaders : String; @:optional
-	var postData : Array<Dynamic>; /**
+	var postData : haxe.extern.EitherType<UploadRawData, UploadFile>; /**
 		Base url (with trailing path separator) for files to be loaded by the data url. This is needed only if the specified `url` is a data url and needs to load other files.
 	**/
 	@:optional
-	var baseURLForDataURL : String; }):js.lib.Promise<Dynamic>;
+	var baseURLForDataURL : String; }):js.lib.Promise<Void>;
 	/**
 		the promise will resolve when the page has finished loading (see `did-finish-load`), and rejects if the page fails to load (see `did-fail-load`).
 		
@@ -119,7 +119,7 @@ package electron.main;
 		Passed to `url.format()`.
 	**/
 	@:optional
-	var query : Record; /**
+	var query : Dynamic; /**
 		Passed to `url.format()`.
 	**/
 	@:optional
@@ -127,7 +127,7 @@ package electron.main;
 		Passed to `url.format()`.
 	**/
 	@:optional
-	var hash : String; }):js.lib.Promise<Dynamic>;
+	var hash : String; }):js.lib.Promise<Void>;
 	/**
 		Initiates a download of the resource at `url` without navigating. The `will-download` event of `session` will be triggered.
 	**/
@@ -135,7 +135,7 @@ package electron.main;
 		HTTP request headers.
 	**/
 	@:optional
-	var headers : Record; }):Void;
+	var headers : Dynamic; }):Void;
 	/**
 		The URL of the current web page.
 	**/
@@ -156,7 +156,6 @@ package electron.main;
 	function close(?opts:{ /**
 		if true, fire the `beforeunload` event before closing the page. If the page prevents the unload, the WebContents will not be closed. The `will-prevent-unload` will be fired if the page requests prevention of unload.
 	**/
-	@:optional
 	var waitForBeforeUnload : Bool; }):Void;
 	/**
 		Focuses the web page.
@@ -249,13 +248,13 @@ package electron.main;
 		Can be 'user' or 'author'. Sets the cascade origin of the inserted stylesheet. Default is 'author'.
 	**/
 	@:optional
-	var cssOrigin : String; }):js.lib.Promise<Dynamic>;
+	var cssOrigin : String; }):js.lib.Promise<String>;
 	/**
 		Resolves if the removal was successful.
 		
 		Removes the inserted CSS from the current web page. The stylesheet is identified by its key, which is returned from `contents.insertCSS(css)`.
 	**/
-	function removeInsertedCSS(key:String):js.lib.Promise<Dynamic>;
+	function removeInsertedCSS(key:String):js.lib.Promise<Void>;
 	/**
 		A promise that resolves with the result of the executed code or is rejected if the result of the code is a rejected promise.
 		
@@ -279,7 +278,26 @@ package electron.main;
 	/**
 		Called before creating a window a new window is requested by the renderer, e.g. by `window.open()`, a link with `target="_blank"`, shift+clicking on a link, or submitting a form with `<form target="_blank">`. See `window.open()` for more details and how to use this in conjunction with `did-create-window`.
 	**/
-	function setWindowOpenHandler(handler:haxe.Constraints.Function):Void;
+	function setWindowOpenHandler(handler:({ /**
+		The _resolved_ version of the URL passed to `window.open()`. e.g. opening a window with `window.open('foo')` will yield something like `https://the-origin/the/current/path/foo`.
+	**/
+	var url : String; /**
+		Name of the window provided in `window.open()`
+	**/
+	var frameName : String; /**
+		Comma separated list of window features provided to `window.open()`.
+	**/
+	var features : String; /**
+		Can be `default`, `foreground-tab`, `background-tab`, `new-window` or `other`.
+	**/
+	var disposition : String; /**
+		The referrer that will be passed to the new window. May or may not result in the `Referer` header being sent, depending on the referrer policy.
+	**/
+	var referrer : Referrer; /**
+		The post data that will be sent to the new window, along with the appropriate headers that will be set. If no post data is to be sent, the value will be `null`. Only defined when the window is being created by a form that set `target=_blank`.
+	**/
+	@:optional
+	var postBody : PostBody; }) -> haxe.extern.EitherType<Dynamic, Dynamic>):Void;
 	/**
 		Mute the audio on the current web page.
 	**/
@@ -317,7 +335,7 @@ package electron.main;
 		
 		> **NOTE**: Visual zoom is disabled by default in Electron. To re-enable it, call:
 	**/
-	function setVisualZoomLevelLimits(minimumLevel:Float, maximumLevel:Float):js.lib.Promise<Dynamic>;
+	function setVisualZoomLevelLimits(minimumLevel:Float, maximumLevel:Float):js.lib.Promise<Void>;
 	/**
 		Executes the editing command `undo` in web page.
 	**/
@@ -405,7 +423,7 @@ package electron.main;
 	/**
 		Inserts `text` to the focused element.
 	**/
-	function insertText(text:String):js.lib.Promise<Dynamic>;
+	function insertText(text:String):js.lib.Promise<Void>;
 	/**
 		The request id used for the request.
 		
@@ -441,7 +459,7 @@ package electron.main;
 		 Keep the system awake instead of allowing it to sleep. Default is `false`.
 	**/
 	@:optional
-	var stayAwake : Bool; }):js.lib.Promise<Dynamic>;
+	var stayAwake : Bool; }):js.lib.Promise<NativeImage>;
 	/**
 		Whether this page is being captured. It returns true when the capturer count is large then 0.
 	**/
@@ -451,7 +469,7 @@ package electron.main;
 		
 		Resolves with a `PrinterInfo[]`
 	**/
-	function getPrintersAsync():js.lib.Promise<Dynamic>;
+	function getPrintersAsync():js.lib.Promise<Array<PrinterInfo>>;
 	/**
 		When a custom `pageSize` is passed, Chromium attempts to validate platform specific minimum values for `width_microns` and `height_microns`. Width and height must both be minimum 353 microns but may be higher on some operating systems.
 		
@@ -525,17 +543,15 @@ package electron.main;
 	var pageRanges : { /**
 		Index of the first page to print (0-based).
 	**/
-	@:optional
 	var from : Float; /**
 		Index of the last page to print (inclusive) (0-based).
 	**/
-	@:optional
 	var to : Float; }; /**
 		Set the duplex mode of the printed web page. Can be `simplex`, `shortEdge`, or `longEdge`.
 	**/
 	@:optional
 	var duplexMode : String; @:optional
-	var dpi : Record; /**
+	var dpi : Dynamic; /**
 		string to be printed as page header.
 	**/
 	@:optional
@@ -547,7 +563,7 @@ package electron.main;
 		Specify page size of the printed document. Can be `A0`, `A1`, `A2`, `A3`, `A4`, `A5`, `A6`, `Legal`, `Letter`, `Tabloid` or an Object containing `height` and `width`.
 	**/
 	@:optional
-	var pageSize : Dynamic; }, ?callback:haxe.Constraints.Function):Void;
+	var pageSize : haxe.extern.EitherType<String, Size>; }, ?callback:(Bool, String) -> Dynamic):Void;
 	/**
 		Resolves with the generated PDF data.
 		
@@ -579,7 +595,7 @@ package electron.main;
 		Specify page size of the generated PDF. Can be `A0`, `A1`, `A2`, `A3`, `A4`, `A5`, `A6`, `Legal`, `Letter`, `Tabloid`, `Ledger`, or an Object containing `height` and `width` in inches. Defaults to `Letter`.
 	**/
 	@:optional
-	var pageSize : Dynamic; @:optional
+	var pageSize : haxe.extern.EitherType<String, Size>; @:optional
 	var margins : { /**
 		Top margin in inches. Defaults to 1cm (~0.4 inches).
 	**/
@@ -616,7 +632,7 @@ package electron.main;
 		Whether or not to generate a tagged (accessible) PDF. Defaults to false. As this property is experimental, the generated PDF may not adhere fully to PDF/UA and WCAG standards.
 	**/
 	@:optional
-	var generateTaggedPDF : Bool; }):js.lib.Promise<Dynamic>;
+	var generateTaggedPDF : Bool; }):js.lib.Promise<js.node.Buffer>;
 	/**
 		Adds the specified path to DevTools workspace. Must be used after DevTools creation:
 	**/
@@ -649,7 +665,6 @@ package electron.main;
 	function openDevTools(?options:{ /**
 		Opens the devtools with specified dock state, can be `left`, `right`, `bottom`, `undocked`, `detach`. Defaults to last used dock state. In `undocked` mode it's possible to dock back. In `detach` mode it's not.
 	**/
-	@:optional
 	var mode : String; /**
 		Whether to bring the opened devtools window to the foreground. The default is `true`.
 	**/
@@ -726,7 +741,7 @@ package electron.main;
 		
 		You can also read `frameId` from all incoming IPC messages in the main process.
 	**/
-	function sendToFrame(frameId:Dynamic, channel:String, args:haxe.extern.Rest<Any>):Void;
+	function sendToFrame(frameId:haxe.extern.EitherType<Int, Dynamic>, channel:String, args:haxe.extern.Rest<Any>):Void;
 	/**
 		Send a message to the renderer process, optionally transferring ownership of zero or more `MessagePortMain` objects.
 		
@@ -734,34 +749,28 @@ package electron.main;
 		
 		For example:
 	**/
-	function postMessage(channel:String, message:Any, ?transfer:Array<MessagePortMain>):Void;
+	function postMessage(channel:String, message:Dynamic, ?transfer:Array<MessagePortMain>):Void;
 	/**
 		Enable device emulation with the given parameters.
 	**/
 	function enableDeviceEmulation(parameters:{ /**
 		Specify the screen type to emulate (default: `desktop`):
 	**/
-	@:optional
 	var screenPosition : String; /**
 		Set the emulated screen size (screenPosition == mobile).
 	**/
-	@:optional
 	var screenSize : Size; /**
 		Position the view on the screen (screenPosition == mobile) (default: `{ x: 0, y: 0 }`).
 	**/
-	@:optional
 	var viewPosition : Point; /**
 		Set the device scale factor (if zero defaults to original device scale factor) (default: `0`).
 	**/
-	@:optional
 	var deviceScaleFactor : Int; /**
 		Set the emulated view size (empty means no override)
 	**/
-	@:optional
 	var viewSize : Size; /**
 		Scale of emulated view inside available space (not in fit to view mode) (default: `1`).
 	**/
-	@:optional
 	var scale : Float; }):Void;
 	/**
 		Disable device emulation enabled by `webContents.enableDeviceEmulation`.
@@ -770,7 +779,7 @@ package electron.main;
 	/**
 		Sends an input `event` to the page. **Note:** The `BrowserWindow` containing the contents needs to be focused for `sendInputEvent()` to work.
 	**/
-	function sendInputEvent(inputEvent:Dynamic):Void;
+	function sendInputEvent(inputEvent:haxe.extern.EitherType<MouseInputEvent, haxe.extern.EitherType<MouseWheelInputEvent, KeyboardInputEvent>>):Void;
 	/**
 		Begin subscribing for presentation events and captured frames, the `callback` will be called with `callback(image, dirtyRect)` when there is a presentation event.
 		
@@ -778,7 +787,7 @@ package electron.main;
 		
 		The `dirtyRect` is an object with `x, y, width, height` properties that describes which part of the page was repainted. If `onlyDirty` is set to `true`, `image` will only contain the repainted area. `onlyDirty` defaults to `false`.
 	**/
-	function beginFrameSubscription(?onlyDirty:Bool, callback:haxe.Constraints.Function):Void;
+	function beginFrameSubscription(?onlyDirty:Bool, callback:(NativeImage, Rectangle) -> Dynamic):Void;
 	/**
 		End subscribing for frame presentation events.
 	**/
@@ -789,7 +798,6 @@ package electron.main;
 	function startDrag(item:{ /**
 		The path to the file being dragged.
 	**/
-	@:optional
 	var file : String; /**
 		The paths to the files being dragged. (`files` will override `file` field)
 	**/
@@ -797,12 +805,11 @@ package electron.main;
 	var files : Array<String>; /**
 		The image must be non-empty on macOS.
 	**/
-	@:optional
-	var icon : Dynamic; }):Void;
+	var icon : haxe.extern.EitherType<NativeImage, String>; }):Void;
 	/**
 		resolves if the page is saved.
 	**/
-	function savePage(fullPath:String, saveType:String):js.lib.Promise<Dynamic>;
+	function savePage(fullPath:String, saveType:String):js.lib.Promise<Void>;
 	/**
 		Shows pop-up dictionary that searches the selected word on the page.
 	**/
@@ -854,11 +861,9 @@ package electron.main;
 	function getWebRTCUDPPortRange():{ /**
 		The minimum UDP port number that WebRTC should use.
 	**/
-	@:optional
 	var min : Int; /**
 		The maximum UDP port number that WebRTC should use.
 	**/
-	@:optional
 	var max : Int; };
 	/**
 		Setting the WebRTC UDP Port Range allows you to restrict the udp port range used by WebRTC. By default the port range is unrestricted. **Note:** To reset to an unrestricted port range this value should be set to `{ min: 0, max: 0 }`.
@@ -866,11 +871,9 @@ package electron.main;
 	function setWebRTCUDPPortRange(udpPortRange:{ /**
 		The minimum UDP port number that WebRTC should use.
 	**/
-	@:optional
 	var min : Int; /**
 		The maximum UDP port number that WebRTC should use.
 	**/
-	@:optional
 	var max : Int; }):Void;
 	/**
 		The identifier of a WebContents stream. This identifier can be used with `navigator.mediaDevices.getUserMedia` using a `chromeMediaSource` of `tab`. The identifier is restricted to the web contents that it is registered to and is only valid for 10 seconds.
@@ -889,7 +892,7 @@ package electron.main;
 		
 		Takes a V8 heap snapshot and saves it to `filePath`.
 	**/
-	function takeHeapSnapshot(filePath:String):js.lib.Promise<Dynamic>;
+	function takeHeapSnapshot(filePath:String):js.lib.Promise<Void>;
 	/**
 		whether or not this WebContents will throttle animations and timers when the page becomes backgrounded. This also affects the Page Visibility API.
 	**/

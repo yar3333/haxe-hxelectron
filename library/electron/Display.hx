@@ -1,5 +1,7 @@
 package electron;
 
+import electron.main.*;
+
 /**
 	The `Display` object represents a physical display connected to the system. A fake `Display` may exist on a headless system, or a `Display` may correspond to a remote, virtual display.
 

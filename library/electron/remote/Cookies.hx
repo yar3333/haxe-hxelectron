@@ -39,7 +39,7 @@ package electron.remote;
 		Filters cookies by httpOnly.
 	**/
 	@:optional
-	var httpOnly : Bool; }):js.lib.Promise<Dynamic>;
+	var httpOnly : Bool; }):js.lib.Promise<Array<Cookie>>;
 	/**
 		A promise which resolves when the cookie has been set
 		
@@ -48,7 +48,6 @@ package electron.remote;
 	function set(details:{ /**
 		The URL to associate the cookie with. The promise will be rejected if the URL is invalid.
 	**/
-	@:optional
 	var url : String; /**
 		The name of the cookie. Empty by default if omitted.
 	**/
@@ -81,13 +80,13 @@ package electron.remote;
 		The Same Site policy to apply to this cookie.  Can be `unspecified`, `no_restriction`, `lax` or `strict`.  Default is `lax`.
 	**/
 	@:optional
-	var sameSite : String; }):js.lib.Promise<Dynamic>;
+	var sameSite : String; }):js.lib.Promise<Void>;
 	/**
 		A promise which resolves when the cookie has been removed
 		
 		Removes the cookies matching `url` and `name`
 	**/
-	function remove(url:String, name:String):js.lib.Promise<Dynamic>;
+	function remove(url:String, name:String):js.lib.Promise<Void>;
 	/**
 		A promise which resolves when the cookie store has been flushed
 		
@@ -97,7 +96,7 @@ package electron.remote;
 		
 		Calling this method can cause the cookie to be written to disk immediately.
 	**/
-	function flushStore():js.lib.Promise<Dynamic>;
+	function flushStore():js.lib.Promise<Void>;
 }
 
 /**

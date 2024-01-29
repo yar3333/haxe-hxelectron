@@ -23,7 +23,7 @@ package electron.main;
 		* For duplicate `cookie` headers, the values are joined together with '; '.
 		* For all other headers, the values are joined together with ', '.
 	**/
-	var headers : Record;
+	var headers : Dynamic;
 	/**
 		A `string` indicating the HTTP protocol version number. Typical values are '1.0' or '1.1'. Additionally `httpVersionMajor` and `httpVersionMinor` are two Integer-valued readable properties that return respectively the HTTP major and minor version numbers.
 	**/
@@ -39,7 +39,7 @@ package electron.main;
 	/**
 		A `string[]` containing the raw HTTP response headers exactly as they were received. The keys and values are in the same list. It is not a list of tuples. So, the even-numbered offsets are key values, and the odd-numbered offsets are the associated values. Header names are not lowercased, and duplicates are not merged.
 	**/
-	var rawHeaders : String;
+	var rawHeaders : Array<String>;
 }
 
 /**

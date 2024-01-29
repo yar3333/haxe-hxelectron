@@ -1,5 +1,7 @@
 package electron;
 
+import electron.main.*;
+
 /**
 	
 
@@ -9,13 +11,16 @@ package electron;
 	/**
 		The text to appear in this segment.
 	**/
+	@:optional
 	var label : String;
 	/**
 		The image to appear in this segment.
 	**/
+	@:optional
 	var icon : NativeImage;
 	/**
 		Whether this segment is selectable. Default: true.
 	**/
+	@:optional
 	var enabled : Bool;
 }

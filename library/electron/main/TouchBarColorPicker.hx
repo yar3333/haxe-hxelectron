@@ -11,7 +11,7 @@ Process: Main<br /> _This class is not exported from the `'electron'` module. It
 	/**
 		A `string[]` array representing the color picker's available colors to select. Changing this value immediately updates the color picker in the touch bar.
 	**/
-	var availableColors : String;
+	var availableColors : Array<String>;
 	/**
 		A `string` hex code representing the color picker's currently selected color. Changing this value immediately updates the color picker in the touch bar.
 	**/
@@ -28,7 +28,7 @@ Process: Main<br /> _This class is not exported from the `'electron'` module. It
 		Function to call when a color is selected.
 	**/
 	@:optional
-	var change : haxe.Constraints.Function; }):Void;
+	var change : String -> Dynamic; }):Void;
 }
 
 /**

@@ -27,7 +27,6 @@ Process: Main<br /> _This class is not exported from the `'electron'` module. It
 	var icon : NativeImage; /**
 		Items to display in the popover.
 	**/
-	@:optional
 	var items : TouchBar; /**
 		`true` to display a close button on the left of the popover, `false` to not show it. Default is `true`.
 	**/

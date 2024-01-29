@@ -17,7 +17,7 @@ package electron.remote;
 		* "Media Previous Track"
 		* "Media Stop"
 	**/
-	static function register(accelerator:Accelerator, callback:haxe.Constraints.Function):Bool;
+	static function register(accelerator:Accelerator, callback:() -> Dynamic):Bool;
 	/**
 		Registers a global shortcut of all `accelerator` items in `accelerators`. The `callback` is called when any of the registered shortcuts are pressed by the user.
 		
@@ -30,7 +30,7 @@ package electron.remote;
 		* "Media Previous Track"
 		* "Media Stop"
 	**/
-	static function registerAll(accelerators:Array<Accelerator>, callback:haxe.Constraints.Function):Void;
+	static function registerAll(accelerators:Array<Accelerator>, callback:() -> Dynamic):Void;
 	/**
 		Whether this application has registered `accelerator`.
 		

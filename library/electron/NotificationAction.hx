@@ -1,5 +1,7 @@
 package electron;
 
+import electron.main.*;
+
 /**
 	
 
@@ -13,5 +15,6 @@ package electron;
 	/**
 		The label for the given action.
 	**/
+	@:optional
 	var text : String;
 }

@@ -1,5 +1,7 @@
 package electron;
 
+import electron.main.*;
+
 /**
 	
 
@@ -33,15 +35,12 @@ package electron;
 	var payment : { /**
 		The identifier of the purchased product.
 	**/
-	@:optional
 	var productIdentifier : String; /**
 		The quantity purchased.
 	**/
-	@:optional
 	var quantity : Int; /**
 		An opaque identifier for the user’s account on your system.
 	**/
-	@:optional
 	var applicationUsername : String; /**
 		The details of the discount offer to apply to the payment.
 	**/

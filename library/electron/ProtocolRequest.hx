@@ -1,5 +1,7 @@
 package electron;
 
+import electron.main.*;
+
 /**
 	
 
@@ -9,6 +11,7 @@ package electron;
 	var url : String;
 	var referrer : String;
 	var method : String;
+	@:optional
 	var uploadData : Array<UploadData>;
-	var headers : Record;
+	var headers : Dynamic;
 }

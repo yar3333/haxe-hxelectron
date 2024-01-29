@@ -15,7 +15,7 @@ Process: Main<br /> _This class is not exported from the `'electron'` module. It
 	/**
 		A `SegmentedControlSegment[]` array representing the segments in this control. Updating this value immediately updates the control in the touch bar. Updating deep properties inside this array **does not update the touch bar**.
 	**/
-	var segments : SegmentedControlSegment;
+	var segments : Array<SegmentedControlSegment>;
 	/**
 		An `Integer` representing the currently selected segment. Changing this value immediately updates the control in the touch bar. User interaction with the touch bar will update this value automatically.
 	**/
@@ -35,7 +35,6 @@ Process: Main<br /> _This class is not exported from the `'electron'` module. It
 	var mode : String; /**
 		An array of segments to place in this control.
 	**/
-	@:optional
 	var segments : Array<SegmentedControlSegment>; /**
 		The index of the currently selected segment, will update automatically with user interaction. When the mode is `multiple` it will be the last selected item.
 	**/
@@ -44,7 +43,7 @@ Process: Main<br /> _This class is not exported from the `'electron'` module. It
 		Called when the user selects a new segment.
 	**/
 	@:optional
-	var change : haxe.Constraints.Function; }):Void;
+	var change : (Int, Bool) -> Dynamic; }):Void;
 }
 
 /**

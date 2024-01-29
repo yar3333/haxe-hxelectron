@@ -16,11 +16,11 @@ package electron.remote;
 		When the log grows beyond this size, logging will automatically stop. Defaults to unlimited.
 	**/
 	@:optional
-	var maxFileSize : Float; }):js.lib.Promise<Dynamic>;
+	var maxFileSize : Float; }):js.lib.Promise<Void>;
 	/**
 		resolves when the net log has been flushed to disk.
 		
 		Stops recording network events. If not called, net logging will automatically end when app quits.
 	**/
-	static function stopLogging():js.lib.Promise<Dynamic>;
+	static function stopLogging():js.lib.Promise<Void>;
 }
