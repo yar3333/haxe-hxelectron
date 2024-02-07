@@ -4,8 +4,8 @@
   "tags": ["electron","node","desktop"],
   "description": "Externs for the electron framework",
   "contributors": ["yar3333"],
-  "releasenote": "* haxe-4",
-  "version": "1.6.16",
+  "releasenote": "Haxe-4. Upgrade to electron-28.2.0. `remote` removed (not supported by modern electron). Common classes moved to `electron` package.",
+  "version": "28.2.0",
   "url": "https://github.com/yar3333/haxe-hxelectron",
   "dependencies": {"hxnodejs":""}
 }
